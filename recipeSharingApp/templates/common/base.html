@@ -1,0 +1,27 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crispy: The recipe sharing app</title>
+</head>
+<body>
+
+<header>
+    {% include 'common/nav.html' %}
+</header>
+
+<main>
+    {% block content %}
+    {% endblock %}
+</main>
+
+<footer>
+    <p>
+        &copy; Created by Nikolay Dimitrov. All rights reserved.
+    </p>
+</footer>
+
+</body>
+</html>

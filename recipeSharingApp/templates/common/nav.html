@@ -1,0 +1,32 @@
+<nav>
+    <ul>
+        <li class="nav-align-left">
+            <a href="#">Home</a>
+        </li>
+        <li>
+            <a href="#">Latest</a>
+        </li>
+        <li>
+            <a href="#">Trending</a>
+        </li>
+        
+        {% if request.user.is_authenticated %}
+            <li>
+                <a href="#">My Recipes</a>
+            </li>
+            <li>
+                <a href="#">Meal Plan</a>
+            </li>
+            <li class="nav-align-right">
+                <a href="#">My Profile</a>
+            </li>
+        {% else %}
+            <li class="nav-align-right">
+                <a href="#">Login</a>
+            </li>
+            <li class="nav-align-right">
+                <a href="#">Register</a>
+            </li>   
+        {% endif %}
+    </ul>
+</nav>
