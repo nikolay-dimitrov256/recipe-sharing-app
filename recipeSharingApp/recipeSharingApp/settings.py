@@ -32,7 +32,8 @@ ALLOWED_HOSTS = []
 # Application definition
 PROJECT_APPS = [
     "recipeSharingApp.accounts.apps.AccountsConfig",
-    "recipeSharingApp.common"
+    "recipeSharingApp.common",
+    "recipeSharingApp.recipes",
 ]
 
 INSTALLED_APPS = [
