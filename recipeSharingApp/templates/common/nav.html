@@ -20,8 +20,7 @@
                 <a href="#">Meal Plan</a>
             </li>
             <li class="nav-align-right">
-                <a href="#">My Profile</a>
-            
+                <a href="{% url 'profile-details' request.user.pk %}">Profile</a>
             </li>
             <li class="nav-align-right">
                 <a id="logout-a" href="#">Logout</a>

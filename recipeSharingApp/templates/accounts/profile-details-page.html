@@ -1,0 +1,20 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+<div>
+    <p>Email: {{ object.email }}</p>
+    <p>First Name: {{ object.first_name }}</p>
+    <p>Last Name: {{ object.last_name }}</p>
+    <p>Date Joined: {{ object.date_joined }}</p>
+    
+    {% if object.profile.about_me %}
+        <p>About me:</p>
+        <p>{{ object.profile.about_me }}</p>
+    {% endif %}
+</div>
+    
+<div>
+    <a href="{% url 'edit-profile' request.user.pk %}">Edit Profile</a>
+    <a href="{% url 'delete-account' request.user.pk %}">Delete Profile</a>
+</div>
+{% endblock %}
