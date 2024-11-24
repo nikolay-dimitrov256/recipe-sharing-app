@@ -1,7 +1,9 @@
+{% load static %}
+
 <nav>
     <ul>
         <li class="nav-align-left">
-            <a href="#">Home</a>
+            <a href="{% url 'home' %}">Home</a>
         </li>
         <li>
             <a href="#">Latest</a>
@@ -19,14 +21,25 @@
             </li>
             <li class="nav-align-right">
                 <a href="#">My Profile</a>
+            
             </li>
+            <li class="nav-align-right">
+                <a id="logout-a" href="#">Logout</a>
+            </li>   
         {% else %}
             <li class="nav-align-right">
-                <a href="#">Login</a>
+                <a href="{% url 'login' %}">Login</a>
             </li>
             <li class="nav-align-right">
-                <a href="#">Register</a>
-            </li>   
+                <a href="{% url 'register' %}">Register</a>
+            </li>
         {% endif %}
     </ul>
+
+<form id="logout-form" method="post" action="{% url 'logout' %}" style="display: none">
+    {% csrf_token %}
+</form>
+
 </nav>
+
+<script src="{% static 'js/accounts/logout.js' %}"></script>
