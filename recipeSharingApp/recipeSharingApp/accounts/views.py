@@ -1,9 +1,13 @@
+from django.contrib import messages
 from django.contrib.auth import get_user_model, login
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.views import LoginView
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
+from django.http import HttpResponseForbidden
+from cloudinary import uploader
 
 from recipeSharingApp.accounts.forms import AppUserCreateForm, ProfileEditForm
 from recipeSharingApp.accounts.models import Profile
@@ -29,14 +33,9 @@ class AppUserRegisterView(CreateView):
         return response
 
 
-class ProfileDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
+class ProfileDetailView(LoginRequiredMixin, DetailView):
     model = UserModel
     template_name = 'accounts/profile-details-page.html'
-
-    def test_func(self):
-        profile = get_object_or_404(Profile, pk=self.kwargs['pk'])
-
-        return self.request.user == profile.user
 
 
 class ProfileEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
@@ -62,3 +61,27 @@ class DeleteAccountView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         profile = get_object_or_404(Profile, pk=self.kwargs['pk'])
 
         return self.request.user == profile.user
+
+
+@login_required
+def delete_profile_picture(request, pk):
+    user = get_object_or_404(UserModel, pk=pk)
+
+    if user != request.user:
+        return HttpResponseForbidden('You are not allowed to edit this profile')
+
+    if user.profile.picture:
+        try:
+            public_id = user.profile.picture.public_id
+            uploader.destroy(public_id)
+            user.profile.picture = None
+            user.profile.save()
+            messages.success(request, 'Profile picture deleted successfully!')
+
+        except Exception as e:
+            messages.error(request, f'An error occurred: {e}')
+
+    else:
+        messages.error('No profile picture to delete.')
+
+    return redirect('profile-details', pk)

@@ -2,6 +2,17 @@
 
 {% block content %}
 <div>
+    {% if object.profile.picture %}
+        <div>
+            {% load cloudinary %}
+            {% cloudinary object.profile.picture quality='auto' width=200 height=200 crop='pad' background='gen_fill:ignore-foreground_true' %}
+            
+            {% if request.user == object %}
+                <a href="{% url 'delete-profile-picture' object.pk %}">Delete Picture</a>
+            {% endif %}
+        </div>
+    {% endif %}
+
     <p>Email: {{ object.email }}</p>
     <p>First Name: {{ object.first_name }}</p>
     <p>Last Name: {{ object.last_name }}</p>
@@ -13,8 +24,11 @@
     {% endif %}
 </div>
     
-<div>
-    <a href="{% url 'edit-profile' request.user.pk %}">Edit Profile</a>
-    <a href="{% url 'delete-account' request.user.pk %}">Delete Profile</a>
-</div>
+{% if object.pk == request.user.pk %}
+    <div>
+        <a href="{% url 'edit-profile' object.pk %}">Edit Profile</a>
+        <a href="{% url 'delete-account' object.pk %}">Delete Profile</a>
+    </div>
+{% endif %}
+    
 {% endblock %}

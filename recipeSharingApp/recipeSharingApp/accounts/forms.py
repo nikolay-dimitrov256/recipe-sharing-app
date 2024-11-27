@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, SetPasswordMixin
 from django import forms
+from cloudinary.forms import CloudinaryFileField
 
 from recipeSharingApp.accounts.models import Profile
 
@@ -37,6 +38,8 @@ class AppUserChangeForm(UserChangeForm):
 
 
 class ProfileEditForm(forms.ModelForm):
+    picture = CloudinaryFileField(label='Profile Picture')
+
     class Meta:
         model = Profile
         exclude = ['user']
