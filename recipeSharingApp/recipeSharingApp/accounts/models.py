@@ -4,6 +4,7 @@ from django.core.mail import send_mail
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+from cloudinary.models import CloudinaryField
 
 from recipeSharingApp.accounts.managers import AppUserManager
 
@@ -73,6 +74,12 @@ class Profile(models.Model):
     )
 
     about_me = models.TextField(
+        null=True,
+        blank=True,
+    )
+
+    picture = CloudinaryField(
+        'image',
         null=True,
         blank=True,
     )
