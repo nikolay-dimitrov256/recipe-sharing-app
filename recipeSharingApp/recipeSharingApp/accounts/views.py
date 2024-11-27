@@ -5,8 +5,7 @@ from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 
-from recipeSharingApp.accounts.forms import AppUserCreateForm, AppUserChangeForm, ProfileEditForm
-from recipeSharingApp.accounts.mixins import AuthoriseUserMixin
+from recipeSharingApp.accounts.forms import AppUserCreateForm, ProfileEditForm
 from recipeSharingApp.accounts.models import Profile
 
 UserModel = get_user_model()
@@ -30,12 +29,17 @@ class AppUserRegisterView(CreateView):
         return response
 
 
-class ProfileDetailView(LoginRequiredMixin, AuthoriseUserMixin, UserPassesTestMixin, DetailView):
+class ProfileDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
     model = UserModel
     template_name = 'accounts/profile-details-page.html'
 
+    def test_func(self):
+        profile = get_object_or_404(Profile, pk=self.kwargs['pk'])
 
-class ProfileEditView(LoginRequiredMixin, AuthoriseUserMixin, UserPassesTestMixin, UpdateView):
+        return self.request.user == profile.user
+
+
+class ProfileEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Profile
     form_class = ProfileEditForm
     template_name = 'accounts/edit-profile-page.html'
@@ -43,8 +47,18 @@ class ProfileEditView(LoginRequiredMixin, AuthoriseUserMixin, UserPassesTestMixi
     def get_success_url(self):
         return reverse_lazy('profile-details', kwargs={'pk': self.object.pk})
 
+    def test_func(self):
+        profile = get_object_or_404(Profile, pk=self.kwargs['pk'])
 
-class DeleteAccountView(LoginRequiredMixin, AuthoriseUserMixin, UserPassesTestMixin, DeleteView):
+        return self.request.user == profile.user
+
+
+class DeleteAccountView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = UserModel
     template_name = 'accounts/delete-account-page.html'
     success_url = reverse_lazy('home')
+
+    def test_func(self):
+        profile = get_object_or_404(Profile, pk=self.kwargs['pk'])
+
+        return self.request.user == profile.user
