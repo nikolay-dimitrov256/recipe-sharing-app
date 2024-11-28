@@ -5,22 +5,37 @@ from cloudinary.models import CloudinaryField
 class Picture(models.Model):
     image = CloudinaryField('image')
 
-    class Meta:
-        abstract = True
+    is_main = models.BooleanField(
+        default=False,
+        blank=True,
+    )
+
+    gallery = models.ForeignKey(
+        to='Gallery',
+        on_delete=models.CASCADE,
+        related_name='pictures',
+    )
+
+    def save(self, *args, **kwargs):
+
+        if self.is_main:
+            # Ensure no other picture in this gallery is main
+            Picture.objects.filter(gallery=self.gallery, is_main=True).exclude(id=self.id).update(is_main=False)
+
+        super().save(*args, **kwargs)
 
 
-class ProfilePicture(Picture):
+class Gallery(models.Model):
     profile = models.OneToOneField(
         to='accounts.Profile',
         on_delete=models.CASCADE,
-        related_name='profile_picture',
+        null=True,
+        blank=True,
     )
 
-
-class RecipePicture(Picture):
-    recipe = models.ForeignKey(
+    recipe = models.OneToOneField(
         to='recipes.Recipe',
         on_delete=models.CASCADE,
-        related_name='gallery',
+        null=True,
+        blank=True,
     )
-

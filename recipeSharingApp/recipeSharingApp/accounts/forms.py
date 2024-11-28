@@ -4,7 +4,7 @@ from django import forms
 from cloudinary.forms import CloudinaryFileField
 
 from recipeSharingApp.accounts.models import Profile
-from recipeSharingApp.pictures.models import ProfilePicture
+from recipeSharingApp.pictures.models import Picture, Gallery
 
 UserModel = get_user_model()
 
@@ -53,8 +53,18 @@ class ProfileEditForm(forms.ModelForm):
             profile.save()
 
             if picture:
-                profile_picture, created = ProfilePicture.objects.get_or_create(profile=profile)
-                profile_picture.image = picture
+                if profile.gallery.exists():
+                    gallery = profile.gallery
+                else:
+                    gallery = Gallery.objects.create(profile=profile)
+
+                profile_picture = Picture(image=picture, gallery=gallery)
+
+                gallery.refresh_from_db()
+
+                if len(gallery) == 1:
+                    profile_picture.is_main = True
+
                 profile_picture.save()
 
         return profile
