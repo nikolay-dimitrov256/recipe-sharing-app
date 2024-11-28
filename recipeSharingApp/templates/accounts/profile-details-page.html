@@ -2,13 +2,13 @@
 
 {% block content %}
 <div>
-    {% if object.profile.picture %}
+    {% if object.profile.profile_picture.image %}
         <div>
             {% load cloudinary %}
-            {% cloudinary object.profile.picture quality='auto' width=200 height=200 crop='pad' background='gen_fill:ignore-foreground_true' %}
+            {% cloudinary object.profile.profile_picture.image quality='auto' width=200 height=200 crop='pad' background='gen_fill:ignore-foreground_true' %}
             
             {% if request.user == object %}
-                <a href="{% url 'delete-profile-picture' object.pk %}">Delete Picture</a>
+                <a href="{% url 'delete-profile-picture' object.profile.profile_picture.pk %}">Delete Picture</a>
             {% endif %}
         </div>
     {% endif %}

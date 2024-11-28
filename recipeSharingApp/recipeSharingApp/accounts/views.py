@@ -62,26 +62,3 @@ class DeleteAccountView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
         return self.request.user == profile.user
 
-
-@login_required
-def delete_profile_picture(request, pk):
-    user = get_object_or_404(UserModel, pk=pk)
-
-    if user != request.user:
-        return HttpResponseForbidden('You are not allowed to edit this profile')
-
-    if user.profile.picture:
-        try:
-            public_id = user.profile.picture.public_id
-            uploader.destroy(public_id)
-            user.profile.picture = None
-            user.profile.save()
-            messages.success(request, 'Profile picture deleted successfully!')
-
-        except Exception as e:
-            messages.error(request, f'An error occurred: {e}')
-
-    else:
-        messages.error('No profile picture to delete.')
-
-    return redirect('profile-details', pk)

@@ -78,11 +78,11 @@ class Profile(models.Model):
         blank=True,
     )
 
-    picture = CloudinaryField(
-        'image',
-        null=True,
-        blank=True,
-    )
+    # picture = CloudinaryField(
+    #     'image',
+    #     null=True,
+    #     blank=True,
+    # )
 
     def __str__(self):
         return self.user.full_name

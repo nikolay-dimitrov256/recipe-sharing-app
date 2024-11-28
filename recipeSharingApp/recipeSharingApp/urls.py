@@ -21,5 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('recipeSharingApp.common.urls')),
     path('accounts/', include('recipeSharingApp.accounts.urls')),
-    path('recipes/', include('recipeSharingApp.recipes.urls'))
+    path('recipes/', include('recipeSharingApp.recipes.urls')),
+    path('pictures/', include('recipeSharingApp.pictures.urls')),
 ]
