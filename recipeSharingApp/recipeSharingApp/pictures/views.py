@@ -14,7 +14,7 @@ UserModel = get_user_model()
 @login_required
 def delete_profile_picture(request, pk):
     picture = get_object_or_404(Picture, pk=pk)
-    user = picture.profile.user
+    user = picture.gallery.profile.user
 
     if user != request.user:
         return HttpResponseForbidden('You are not allowed to edit this profile')

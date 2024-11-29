@@ -1,6 +1,8 @@
 from django.db import models
 from cloudinary.models import CloudinaryField
 
+from recipeSharingApp.pictures.managers import PictureManager
+
 
 class Picture(models.Model):
     image = CloudinaryField('image')
@@ -15,6 +17,8 @@ class Picture(models.Model):
         on_delete=models.CASCADE,
         related_name='pictures',
     )
+
+    objects = PictureManager()
 
     def save(self, *args, **kwargs):
 

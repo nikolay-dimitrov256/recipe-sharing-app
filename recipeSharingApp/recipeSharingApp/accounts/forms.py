@@ -53,7 +53,7 @@ class ProfileEditForm(forms.ModelForm):
             profile.save()
 
             if picture:
-                if profile.gallery.exists():
+                if hasattr(profile, 'gallery'):
                     gallery = profile.gallery
                 else:
                     gallery = Gallery.objects.create(profile=profile)
@@ -62,7 +62,7 @@ class ProfileEditForm(forms.ModelForm):
 
                 gallery.refresh_from_db()
 
-                if len(gallery) == 1:
+                if len(gallery.pictures.all()) == 0:
                     profile_picture.is_main = True
 
                 profile_picture.save()
