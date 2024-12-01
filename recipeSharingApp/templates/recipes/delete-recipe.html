@@ -1,0 +1,10 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+    <h2>Are you sure you want to delete this recipe?</h2>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">YES, DELETE!!!</button>
+        <button type="reset" onclick="history.back()">No, go back!</button>
+    </form>
+{% endblock %}

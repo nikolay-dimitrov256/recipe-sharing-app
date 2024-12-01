@@ -1,7 +1,8 @@
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DetailView, UpdateView
+from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 
 from recipeSharingApp.recipes.forms import RecipeCreateForm, RecipeEditForm
 from recipeSharingApp.recipes.models import Recipe
@@ -36,7 +37,7 @@ class DetailsRecipeView(DetailView):
     template_name = 'recipes/recipe-details.html'
 
 
-class EditRecipeView(UpdateView):
+class EditRecipeView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Recipe
     template_name = 'recipes/edit-recipe.html'
     form_class = RecipeEditForm
@@ -55,3 +56,18 @@ class EditRecipeView(UpdateView):
 
         return recipe
 
+    def test_func(self):
+        recipe = get_object_or_404(Recipe, pk=self.kwargs['pk'])
+
+        return recipe.author == self.request.user
+
+
+class DeleteRecipeView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Recipe
+    template_name = 'recipes/delete-recipe.html'
+    success_url = reverse_lazy('home')
+
+    def test_func(self):
+        recipe = get_object_or_404(Recipe, pk=self.kwargs['pk'])
+
+        return recipe.author == self.request.user
