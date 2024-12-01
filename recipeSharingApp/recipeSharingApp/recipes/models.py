@@ -1,10 +1,12 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
+from recipeSharingApp.common.mixins import CreatedMixin, UpdatedMixin
+
 UserModel = get_user_model()
 
 
-class Recipe(models.Model):
+class Recipe(CreatedMixin, UpdatedMixin):
     title = models.CharField(
         max_length=150,
     )
