@@ -1,0 +1,22 @@
+<div class="recipe-card">
+    
+    <h2>{{ recipe.title }}</h2>
+    <p>{{ recipe.description }}</p>
+    <p>{{ recipe.instructions }}</p>
+    
+    {% for ingredient, quantity in recipe.ingredients.items %}
+        <p>{{ ingredient }} - {{ quantity }}</p>
+    {% endfor %}
+    
+    <div>
+        {% for tag in recipe.tags.all %}
+            <a href="#">#{{ tag.name }}</a>
+        {% endfor %}
+    </div>
+    <p>Created by: 
+        {% if recipe.author %}
+            <a href="{% url 'profile-details' recipe.author.pk %}">{{ recipe.author.full_name }}</a></p>
+        {% endif %}
+    <a href="{% url 'recipe-details' recipe.pk %}">See more</a>
+    
+</div>
