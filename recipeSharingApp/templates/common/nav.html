@@ -14,6 +14,9 @@
         
         {% if request.user.is_authenticated %}
             <li>
+                <a href="{% url 'create-recipe' %}">New Recipe</a>
+            </li>
+            <li>
                 <a href="#">My Recipes</a>
             </li>
             <li>

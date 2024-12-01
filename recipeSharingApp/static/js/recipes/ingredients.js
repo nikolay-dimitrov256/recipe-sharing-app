@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Serialize ingredients to JSON on form submission
-    document.querySelector('form').addEventListener('submit', function () {
+    document.getElementById('recipe-create-form').addEventListener('submit', function () {
         const ingredients = {};
         document.querySelectorAll('.ingredient-row').forEach(row => {
             const name = row.querySelector('[name="ingredient_name"]').value.trim();

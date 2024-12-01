@@ -3,7 +3,7 @@
 
 {% block content %}
     
-    <form method="post">
+    <form id="recipe-create-form" method="post" enctype="multipart/form-data">
     
         {% csrf_token %}
         {{ form.as_p }}
@@ -11,7 +11,7 @@
         <button>Create Recipe</button>
     
     </form>
-    
+
     <script src="{% static 'js/recipes/ingredients.js' %}"></script>
     
 {% endblock %}
