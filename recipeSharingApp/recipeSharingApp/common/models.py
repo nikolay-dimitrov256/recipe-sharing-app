@@ -5,9 +5,15 @@ UserModel = get_user_model()
 
 
 class Tag(models.Model):
+    TAG_MAX_LENGTH = 20
+
     name = models.CharField(
-        max_length=20,
+        max_length=TAG_MAX_LENGTH,
+        unique=True,
     )
+
+    def __str__(self):
+        return self.name
 
 
 class Like(models.Model):

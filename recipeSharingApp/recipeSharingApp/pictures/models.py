@@ -5,7 +5,11 @@ from recipeSharingApp.pictures.managers import PictureManager
 
 
 class Picture(models.Model):
-    image = CloudinaryField('image')
+    image = CloudinaryField(
+        'image',
+        null=True,
+        blank=True,
+    )
 
     is_main = models.BooleanField(
         default=False,

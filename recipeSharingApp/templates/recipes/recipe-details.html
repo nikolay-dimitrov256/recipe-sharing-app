@@ -1,5 +1,33 @@
 {% extends 'common/base.html' %}
 
 {% block content %}
+    
+    {% if object.gallery.pictures.get_main %}
+    <div>
+        {% load cloudinary %}
+        {% cloudinary object.gallery.pictures.get_main.image quality='auto' width=200 height=200 crop='pad' background='gen_fill:ignore-foreground_true' %}
+    </div>
+    {% endif %}
+    
+    <p>{{ object.title }}</p>
+    <p>{{ object.description }}</p>
+    <p>{{ object.instructions }}</p>
+    <div>
+    {% for ingredient, quantity in object.ingredients.items %}
+        <p>{{ ingredient }}: {{ quantity }}</p>
+    {% endfor %}
+    </div>
+    <div>
+    {% for tag in object.tags.all %}
+        <a href="#">#{{ tag }}</a>
+    {% endfor %}
+    </div>
+    
+    {% if object.author == request.user %}
+    <div>
+        <a href="{% url 'edit-recipe' object.pk %}">Edit</a>
+        <a href="#">Delete</a>
+    </div>
+    {% endif %}
 
 {% endblock %}
