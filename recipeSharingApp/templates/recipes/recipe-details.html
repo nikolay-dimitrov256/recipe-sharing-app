@@ -6,6 +6,7 @@
     <div>
         {% load cloudinary %}
         {% cloudinary object.gallery.pictures.get_main.image quality='auto' width=200 height=200 crop='pad' background='gen_fill:ignore-foreground_true' %}
+        <a href="{% url 'delete-picture' object.gallery.pictures.get_main.pk %}">Delete</a>
     </div>
     {% endif %}
     

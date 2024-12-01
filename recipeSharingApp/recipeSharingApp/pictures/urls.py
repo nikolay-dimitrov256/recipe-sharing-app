@@ -3,6 +3,6 @@ from recipeSharingApp.pictures import views
 
 urlpatterns = [
     path('<int:pk>/', include([
-        path('delete/', views.delete_profile_picture, name='delete-profile-picture')
+        path('delete/', views.DeletePictureView.as_view(), name='delete-picture'),
     ]))
 ]

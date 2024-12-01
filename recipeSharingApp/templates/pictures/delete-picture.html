@@ -1,0 +1,12 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+    
+    <h2>Delete Picture?</h2>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">YES!!!</button>
+        <button type="reset" onclick="history.back()">No!</button>
+    </form>
+
+{% endblock %}

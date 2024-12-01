@@ -8,7 +8,7 @@
             {% cloudinary object.profile.gallery.pictures.get_main.image quality='auto' width=200 height=200 crop='pad' background='gen_fill:ignore-foreground_true' %}
             
             {% if request.user == object %}
-                <a href="{% url 'delete-profile-picture' object.profile.gallery.pictures.get_main.pk %}">Delete Picture</a>
+                <a href="{% url 'delete-picture' object.profile.gallery.pictures.get_main.pk %}">Delete Picture</a>
             {% endif %}
         </div>
     {% endif %}
