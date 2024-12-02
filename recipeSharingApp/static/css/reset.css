@@ -7,7 +7,15 @@
 }
 
 html {
-    font: 16px/1.5 system-ui, sans-serif;
+    font: 14px/1.5 system-ui, sans-serif;
+    & {
+        @media (min-width: 600px) {
+            font: 16px/1.5 system-ui, sans-serif;
+        }
+        @media (min-width: 1000px) {
+            font: 18px/1.5 system-ui, sans-serif;
+        }
+    }
 }
 
 body,
