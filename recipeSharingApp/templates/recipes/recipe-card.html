@@ -19,4 +19,18 @@
         {% endif %}
     <a href="{% url 'recipe-details' recipe.pk %}">See more</a>
     
+    <div>
+        <a href="#"
+            {% if recipe.is_liked %}
+                class="liked"
+            {% endif %}
+        >
+            {% if recipe.is_liked %}
+            Liked
+            {% else %}
+            Like
+            {% endif %}
+        </a>
+        <span>{{ recipe.likes.count }} likes</span>
+    </div>
 </div>

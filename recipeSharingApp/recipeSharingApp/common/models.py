@@ -19,10 +19,12 @@ class Tag(models.Model):
 class Like(models.Model):
     author = models.ForeignKey(
         to=UserModel,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name='likes',
     )
 
     recipe = models.ForeignKey(
         to='recipes.Recipe',
         on_delete=models.CASCADE,
+        related_name='likes',
     )

@@ -12,3 +12,8 @@ body * {
 body > main {
     flex-grow: 1;
 }
+
+.img-frame {
+    width: 200px;
+    height: 200px;
+}
