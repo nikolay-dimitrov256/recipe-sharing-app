@@ -1,4 +1,4 @@
-<div class="recipe-card">
+<div class="recipe-card" id="{{ recipe.pk }}">
     
     <h2>{{ recipe.title }}</h2>
     <p>{{ recipe.description }}</p>
@@ -19,7 +19,7 @@
         {% endif %}
     <a href="{% url 'recipe-details' recipe.pk %}">See more</a>
     
-    <div>
+    <div class="likes">
         <a href="#"
             {% if recipe.is_liked %}
                 class="liked"

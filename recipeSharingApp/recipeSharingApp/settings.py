@@ -56,6 +56,7 @@ INSTALLED_APPS = [
         'cloudinary',
         'cloudinary_storage',
         'rest_framework',
+        'corsheaders',
 ] + PROJECT_APPS
 
 MIDDLEWARE = [
@@ -66,7 +67,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'corsheaders.middleware.CorsMiddleware',
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True if DEBUG else False
 
 ROOT_URLCONF = 'recipeSharingApp.urls'
 
@@ -152,6 +157,15 @@ LOGIN_REDIRECT_URL = reverse_lazy('home')
 LOGOUT_REDIRECT_URL = reverse_lazy('home')
 
 CSRF_COOKIE_SECURE = True
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication'
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated'
+    ]
+}
 
 # CLOUDINARY_STORAGE = {
 #     'CLOUD_NAME': config('CLOUDINARY_CLOUD_NAME'),

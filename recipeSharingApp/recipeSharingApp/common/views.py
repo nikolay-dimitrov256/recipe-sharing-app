@@ -1,11 +1,18 @@
+from django.contrib.auth import get_user_model
 from django.db.models import F
 from django.shortcuts import render
 from django.views.generic import ListView
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.status import HTTP_400_BAD_REQUEST, HTTP_201_CREATED, HTTP_204_NO_CONTENT, HTTP_404_NOT_FOUND
+from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 
 from recipeSharingApp.common.models import Like
 from recipeSharingApp.common.serializers import LikeSerializer
 from recipeSharingApp.recipes.models import Recipe
+
+UserModel = get_user_model()
 
 
 class HomeView(ListView):
@@ -25,9 +32,35 @@ class HomeView(ListView):
         return context
 
 
-class LikeViewSet(ModelViewSet):
-    queryset = Like.objects.all()
-    serializer_class = LikeSerializer
+class LikeCreateView(APIView):
+    permission_classes = [IsAuthenticated]
 
-    def get_queryset(self):
-        return Like.objects.all()
+    def post(self, request, *args, **kwargs):
+        serializer = LikeSerializer(data=request.data)
+
+        if serializer.is_valid():
+            author = self.request.user
+            recipe = serializer.validated_data.get('recipe')
+
+            if Like.objects.filter(author=author, recipe=recipe).exists():
+                return Response({'detail': 'You have already liked this recipe.'}, status=HTTP_400_BAD_REQUEST)
+
+            like = Like.objects.create(author=author, recipe=recipe)
+            return Response(LikeSerializer(like).data, status=HTTP_201_CREATED)
+
+        return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
+
+
+class LikeDeleteView(APIView):
+
+
+    def delete(self, request, *args, **kwargs):
+        author_id = self.kwargs.get('author_id')
+        recipe_id = self.kwargs.get('recipe_id')
+
+        try:
+            like = Like.objects.get(author_id=author_id, recipe_id=recipe_id)
+            like.delete()
+            return Response(status=HTTP_204_NO_CONTENT)
+        except Like.DoesNotExist:
+            return Response({'detail': 'Like not found.'}, status=HTTP_404_NOT_FOUND)
