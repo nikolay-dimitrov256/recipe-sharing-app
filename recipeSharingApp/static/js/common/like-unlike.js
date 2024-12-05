@@ -46,7 +46,7 @@ function unlike(likeAElement, baseURL) {
     const recipeID = likeAElement.parentElement.parentElement.id;
     const csrfToken = getCSRFToken();
 
-    fetch(`${baseURL}/unlike/${recipeID}/`, {
+    fetch(`${baseURL}/like/${recipeID}/`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json',
@@ -71,7 +71,7 @@ function refreshLikes(likeAElement, recipeID, baseURL) {
     const likesSpanElement = likeAElement.parentElement.querySelector('.likes-count');
     const csrfToken = getCSRFToken();
 
-    fetch(`${baseURL}/get-likes/${recipeID}/`, {
+    fetch(`${baseURL}/like/${recipeID}/`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

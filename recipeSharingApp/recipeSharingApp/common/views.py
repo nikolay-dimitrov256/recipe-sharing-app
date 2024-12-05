@@ -52,8 +52,7 @@ class LikeCreateView(APIView):
         return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
 
 
-class LikeDeleteView(APIView):
-
+class LikeRetrieveDeleteView(APIView):
 
     def delete(self, request, *args, **kwargs):
         author_id = self.request.user.pk
@@ -67,7 +66,6 @@ class LikeDeleteView(APIView):
             return Response({'detail': 'Like not found.'}, status=HTTP_404_NOT_FOUND)
 
 
-class LikesRetrieveView(APIView):
     def get(self, request, *args, **kwargs):
         recipe_id = self.kwargs.get('recipe_id')
 
