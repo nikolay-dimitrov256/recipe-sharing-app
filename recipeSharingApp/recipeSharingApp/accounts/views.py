@@ -33,7 +33,7 @@ class AppUserRegisterView(CreateView):
         return response
 
 
-class ProfileDetailView(LoginRequiredMixin, DetailView):
+class ProfileDetailView(DetailView):
     model = UserModel
     template_name = 'accounts/profile-details-page.html'
 
@@ -63,6 +63,7 @@ class DeleteAccountView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return self.request.user == profile.user
 
 
+@login_required
 def follow_user(request, pk):
     follower = request.user
     followed = UserModel.objects.get(pk=pk)
@@ -72,6 +73,7 @@ def follow_user(request, pk):
     return redirect('profile-details', pk=pk)
 
 
+@login_required
 def unfollow_user(request, pk):
     follower = request.user
     followed = UserModel.objects.get(pk=pk)
