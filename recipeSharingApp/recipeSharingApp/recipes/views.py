@@ -36,6 +36,15 @@ class DetailsRecipeView(DetailView):
     model = Recipe
     template_name = 'recipes/recipe-details.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+        recipe = context['object']
+        recipe.is_liked = recipe.likes.filter(author=user).exists() if self.request.user.is_authenticated else False
+
+        return context
+
+
 
 class EditRecipeView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Recipe

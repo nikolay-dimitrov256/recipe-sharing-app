@@ -1,34 +1,51 @@
 {% extends 'common/base.html' %}
+{% load static %}
 
 {% block content %}
+    <article class="recipe" id="{{ recipe.pk }}">
     
-    {% if object.gallery.pictures.get_main %}
-    <div>
-        {% load cloudinary %}
-        {% cloudinary object.gallery.pictures.get_main.image quality='auto' width=200 height=200 crop='pad' background='gen_fill:ignore-foreground_true' %}
-        <a href="{% url 'delete-picture' object.gallery.pictures.get_main.pk %}">Delete</a>
-    </div>
-    {% endif %}
+        {% if object.gallery.pictures.get_main %}
+        <div>
+            {% load cloudinary %}
+            {% cloudinary object.gallery.pictures.get_main.image quality='auto' width=200 height=200 crop='pad' background='gen_fill:ignore-foreground_true' %}
+            <a href="{% url 'delete-picture' object.gallery.pictures.get_main.pk %}">Delete</a>
+        </div>
+        {% endif %}
+        
+        <h1>{{ object.title }}</h1>
+        <p>{{ object.description }}</p>
+        <p>{{ object.instructions }}</p>
+        <div>
+        {% for ingredient, quantity in object.ingredients.items %}
+            <p>{{ ingredient }}: {{ quantity }}</p>
+        {% endfor %}
+        </div>
+        <div>
+        {% for tag in object.tags.all %}
+            <a href="#">#{{ tag }}</a>
+        {% endfor %}
+        </div>
+        
+        {% if object.author == request.user %}
+        <div>
+            <a href="{% url 'edit-recipe' object.pk %}">Edit</a>
+            <a href="{% url 'delete-recipe' object.pk %}">Delete</a>
+        </div>
+        {% endif %}
+        
+        <div class="likes">
+            <a href="#"
+                {% if recipe.is_liked %}
+                    class="liked"
+                {% endif %}
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"/></svg>
+            </a>
+            <span class="likes-count">{{ recipe.likes.count }} likes</span>
+        </div>
     
-    <p>{{ object.title }}</p>
-    <p>{{ object.description }}</p>
-    <p>{{ object.instructions }}</p>
-    <div>
-    {% for ingredient, quantity in object.ingredients.items %}
-        <p>{{ ingredient }}: {{ quantity }}</p>
-    {% endfor %}
-    </div>
-    <div>
-    {% for tag in object.tags.all %}
-        <a href="#">#{{ tag }}</a>
-    {% endfor %}
-    </div>
+    </article>
     
-    {% if object.author == request.user %}
-    <div>
-        <a href="{% url 'edit-recipe' object.pk %}">Edit</a>
-        <a href="{% url 'delete-recipe' object.pk %}">Delete</a>
-    </div>
-    {% endif %}
-
+    <script src="{% static 'js/common/like-unlike.js' %}"></script>
+    
 {% endblock %}

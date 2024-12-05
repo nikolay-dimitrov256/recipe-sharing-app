@@ -1,9 +1,9 @@
 window.addEventListener('load', setEvents);
 
 function setEvents(e) {
-    const recipeCardElements = document.querySelectorAll('.recipe-card');
+    const recipeElements = document.querySelectorAll('.recipe');
 
-    recipeCardElements.forEach(element => {
+    recipeElements.forEach(element => {
         const likeAElement = element.querySelector('.likes a');
         likeAElement.addEventListener('click', (e) => likeUnlike(e, element, likeAElement))
     });
@@ -21,7 +21,7 @@ function likeUnlike(e, recipeCardElement, likeAElement) {
 }
 
 function like(recipeCardElement, likeAElement, baseURL) {
-    const recipeID = recipeCardElement.id;
+    const recipeID = likeAElement.parentElement.parentElement.id;
     const csrftoken = getCSRFToken();
 
     fetch(`${baseURL}/like/`, {
@@ -56,7 +56,7 @@ function unlike(likeAElement, baseURL) {
     })
         .then(response => {
             if (response.ok) {
-                likeAElement.classList.toggle('liked')
+                likeAElement.classList.toggle('liked');
                 refreshLikes(likeAElement, recipeID, baseURL);
             }
         })
