@@ -46,6 +46,26 @@
     
     </article>
     
+    <div class="comments">
+        <h4>Comments:</h4>
+    
+        {% for comment in object.comments.all %}
+            <div class="comment">
+                <p>Posted by {{ comment.author.full_name }} on {{ comment.created_at }}</p>
+                <p>{{ comment.content }}</p>
+            </div>
+        {% endfor %}
+    
+        <form method="post" action="{% url 'add-comment' object.pk %}">
+            
+            {% csrf_token %}
+            {{ comment_form }}
+            <button type="submit">Post Comment</button>
+            
+        </form>
+    
+    </div>
+    
     <script src="{% static 'js/common/like-unlike.js' %}"></script>
     
 {% endblock %}

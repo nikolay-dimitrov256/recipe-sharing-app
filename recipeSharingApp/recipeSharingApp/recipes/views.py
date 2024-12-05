@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 
+from recipeSharingApp.common.forms import CommentCreateForm
 from recipeSharingApp.recipes.forms import RecipeCreateForm, RecipeEditForm
 from recipeSharingApp.recipes.models import Recipe
 
@@ -38,6 +39,7 @@ class DetailsRecipeView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['comment_form'] = CommentCreateForm()
         user = self.request.user
         recipe = context['object']
         recipe.is_liked = recipe.likes.filter(author=user).exists() if self.request.user.is_authenticated else False
