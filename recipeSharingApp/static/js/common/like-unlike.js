@@ -5,13 +5,17 @@ function setEvents(e) {
 
     recipeElements.forEach(element => {
         const likeAElement = element.querySelector('.likes a');
-        likeAElement.addEventListener('click', (e) => likeUnlike(e, element, likeAElement))
+        likeAElement.addEventListener('click', (e) => {
+            e.preventDefault();
+            likeUnlike(e, element, likeAElement);
+        });
     });
 }
 
 function likeUnlike(e, recipeCardElement, likeAElement) {
     // TODO: Change at deploy
-    const baseURL = 'http://localhost:8000';
+    // const baseURL = 'http://localhost:8000';
+    const baseURL = window.location.origin;
 
     if (likeAElement.classList.contains('liked')) {
         unlike(likeAElement, baseURL);
