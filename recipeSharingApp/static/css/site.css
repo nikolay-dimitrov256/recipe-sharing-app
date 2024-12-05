@@ -17,3 +17,25 @@ body > main {
     width: 200px;
     height: 200px;
 }
+
+.likes a {
+    text-decoration: none;
+}
+
+.likes .liked:hover svg,
+.likes svg {
+    width: 2em;
+    height: auto;
+    fill: transparent;
+    stroke: #000;
+    stroke-width: 20px;
+    transition: all 0.2s linear;
+}
+
+.likes a:hover svg,
+.likes .liked svg {
+    fill: red;
+    stroke: red;
+    stroke-width: 20px;
+    transition: all 0.2s linear;
+}

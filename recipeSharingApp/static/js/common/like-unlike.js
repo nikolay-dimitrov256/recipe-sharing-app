@@ -14,7 +14,7 @@ function likeUnlike(e, recipeCardElement, likeAElement) {
     const baseURL = 'http://localhost:8000';
 
     if (likeAElement.classList.contains('liked')) {
-        unlike();
+        unlike(likeAElement, baseURL);
     } else {
         like(recipeCardElement, likeAElement, baseURL);
     }
@@ -33,15 +33,56 @@ function like(recipeCardElement, likeAElement, baseURL) {
         credentials: 'same-origin',
         body: JSON.stringify({ recipe: recipeID })
     })
-        .then(response => response.json())
-        .then(data => console.log(data))
+        .then(response => {
+            if (response.ok) {
+                likeAElement.classList.add('liked')
+                refreshLikes(likeAElement, recipeID, baseURL);
+            }
+        })
         .catch(error => console.error(error));
 }
 
-function unlike() {
+function unlike(likeAElement, baseURL) {
+    const recipeID = likeAElement.parentElement.parentElement.id;
+    const csrfToken = getCSRFToken();
 
+    fetch(`${baseURL}/unlike/${recipeID}/`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken
+        },
+        credentials: 'same-origin'
+    })
+        .then(response => {
+            if (response.ok) {
+                likeAElement.classList.toggle('liked')
+                refreshLikes(likeAElement, recipeID, baseURL);
+            }
+        })
+        .catch(error => console.error(error))
 }
 
 function getCSRFToken() {
     return document.querySelector('#logout-form input[type="hidden"]').value;
+}
+
+function refreshLikes(likeAElement, recipeID, baseURL) {
+    const likesSpanElement = likeAElement.parentElement.querySelector('.likes-count');
+    const csrfToken = getCSRFToken();
+
+    fetch(`${baseURL}/get-likes/${recipeID}/`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken
+        },
+        credentials: 'same-origin'
+    })
+        .then(response => response.json())
+        .then(data => {
+            const likesCount = data['likes_count'];
+            likesSpanElement.textContent = `${likesCount} likes`
+        })
+        .catch(error => console.error(error));
 }

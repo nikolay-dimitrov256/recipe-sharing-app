@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db.models import F
+from django.http import JsonResponse
 from django.shortcuts import render
 from django.views.generic import ListView
 from rest_framework.permissions import IsAuthenticated
@@ -55,7 +56,7 @@ class LikeDeleteView(APIView):
 
 
     def delete(self, request, *args, **kwargs):
-        author_id = self.kwargs.get('author_id')
+        author_id = self.request.user.pk
         recipe_id = self.kwargs.get('recipe_id')
 
         try:
@@ -64,3 +65,13 @@ class LikeDeleteView(APIView):
             return Response(status=HTTP_204_NO_CONTENT)
         except Like.DoesNotExist:
             return Response({'detail': 'Like not found.'}, status=HTTP_404_NOT_FOUND)
+
+
+class LikesRetrieveView(APIView):
+    def get(self, request, *args, **kwargs):
+        recipe_id = self.kwargs.get('recipe_id')
+
+        likes_count = Like.objects.filter(recipe_id=recipe_id).count()
+        data = {'likes_count': likes_count}
+
+        return Response(data, status=200)
