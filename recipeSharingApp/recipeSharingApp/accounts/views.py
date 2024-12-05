@@ -62,3 +62,20 @@ class DeleteAccountView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
         return self.request.user == profile.user
 
+
+def follow_user(request, pk):
+    follower = request.user
+    followed = UserModel.objects.get(pk=pk)
+
+    follower.following.add(followed)
+
+    return redirect('profile-details', pk=pk)
+
+
+def unfollow_user(request, pk):
+    follower = request.user
+    followed = UserModel.objects.get(pk=pk)
+
+    follower.following.remove(followed)
+
+    return redirect('profile-details', pk=pk)

@@ -53,7 +53,7 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
         """
         Return the first_name plus the last_name, with a space in between.
         """
-        full_name = "%s %s" % (self.first_name, self.last_name)
+        full_name = "%s %s" % (self.first_name or '', self.last_name or '')
         return full_name.strip()
 
     @property

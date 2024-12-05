@@ -30,6 +30,18 @@
         <a href="{% url 'edit-profile' object.pk %}">Edit Profile</a>
         <a href="{% url 'delete-account' object.pk %}">Delete Profile</a>
     </div>
+{% else %}
+    {% if object in request.user.following.all %}
+        <form id="unfollow-form" method="post" action="{% url 'unfollow-user' object.pk %}">
+            {% csrf_token %}
+            <a href="#" onclick="document.getElementById('unfollow-form').submit()">Unfollow</a>
+        </form>
+    {% else %}
+        <form id="follow-form" method="post" action="{% url 'follow-user' object.pk %}">
+            {% csrf_token %}
+            <a href="#" onclick="document.getElementById('follow-form').submit()">Follow</a>
+        </form>
+    {% endif %}
 {% endif %}
     
 {% endblock %}
