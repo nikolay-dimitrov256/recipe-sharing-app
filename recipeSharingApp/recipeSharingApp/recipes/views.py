@@ -119,3 +119,11 @@ class TrendingRecipesView(SetIsLikedInContextMixin, ListView):
             .filter(created_at__gte=Now() - timedelta(days=7))
             .order_by('-likes_count')
         )
+
+
+class MyRecipesView(LoginRequiredMixin, SetIsLikedInContextMixin, ListView):
+    model = Recipe
+    template_name = 'recipes/my-recipes.html'
+
+    def get_queryset(self):
+        return Recipe.objects.filter(author=self.request.user).order_by('-created_at', '-updated_at')

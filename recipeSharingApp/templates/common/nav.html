@@ -12,7 +12,7 @@
         {% if request.user.is_authenticated %}
             
             <li>
-                <a href="#">My Recipes</a>
+                <a href="{% url 'my-recipes' %}">My Recipes</a>
             </li>
             <li>
                 <a href="{% url 'create-recipe' %}">New Recipe</a>
