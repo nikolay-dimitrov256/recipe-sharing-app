@@ -1,15 +1,19 @@
 import json
+from datetime import datetime, timedelta
 from json import JSONDecodeError
 
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.exceptions import ValidationError
+from django.db.models import F, Count
+from django.db.models.functions import Now
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
+from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, ListView
 
 from recipeSharingApp.common.forms import CommentCreateForm
 from recipeSharingApp.recipes.forms import RecipeCreateForm, RecipeEditForm
+from recipeSharingApp.recipes.mixins import SetIsLikedInContextMixin
 from recipeSharingApp.recipes.models import Recipe
 
 
@@ -102,3 +106,16 @@ class DeleteRecipeView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         recipe = get_object_or_404(Recipe, pk=self.kwargs['pk'])
 
         return recipe.author == self.request.user
+
+
+class TrendingRecipesView(SetIsLikedInContextMixin, ListView):
+    model = Recipe
+    template_name = 'recipes/trending-recipes.html'
+
+    def get_queryset(self):
+        return (
+            Recipe.objects
+            .annotate(likes_count=Count('likes'))
+            .filter(created_at__gte=Now() - timedelta(days=7))
+            .order_by('-likes_count')
+        )

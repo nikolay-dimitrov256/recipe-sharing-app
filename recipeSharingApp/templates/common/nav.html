@@ -6,18 +6,16 @@
             <a href="{% url 'home' %}">Home</a>
         </li>
         <li>
-            <a href="#">Latest</a>
-        </li>
-        <li>
-            <a href="#">Trending</a>
+            <a href="{% url 'trending-recipes' %}">Trending</a>
         </li>
         
         {% if request.user.is_authenticated %}
-            <li>
-                <a href="{% url 'create-recipe' %}">New Recipe</a>
-            </li>
+            
             <li>
                 <a href="#">My Recipes</a>
+            </li>
+            <li>
+                <a href="{% url 'create-recipe' %}">New Recipe</a>
             </li>
             <li>
                 <a href="{% url 'shopping-list-details' request.user.shoppinglist.pk %}">Shopping List</a>
@@ -28,13 +26,16 @@
             <li class="nav-align-right">
                 <a id="logout-a" href="#">Logout</a>
             </li>
+            
         {% else %}
+            
             <li class="nav-align-right">
                 <a href="{% url 'login' %}">Login</a>
             </li>
             <li class="nav-align-right">
                 <a href="{% url 'register' %}">Register</a>
             </li>
+            
         {% endif %}
     </ul>
 
