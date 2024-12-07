@@ -8,7 +8,7 @@ class HomeView(ListView):
     template_name = 'recipes/recipe-list.html'
 
     def get_queryset(self):
-        return Recipe.objects.prefetch_related('likes__author').all().order_by('-created_at')
+        return Recipe.objects.all().order_by('-created_at', '-updated_at')
 
     def get_context_data(self, object_list=None, **kwargs):
         context = super().get_context_data(object_list=None, **kwargs)

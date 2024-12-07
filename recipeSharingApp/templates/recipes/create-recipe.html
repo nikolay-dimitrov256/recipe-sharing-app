@@ -3,7 +3,7 @@
 
 {% block content %}
     
-    <form id="recipe-create-form" method="post" enctype="multipart/form-data">
+    <form id="recipe-form" method="post" enctype="multipart/form-data">
     
         {% csrf_token %}
         {{ form.as_p }}

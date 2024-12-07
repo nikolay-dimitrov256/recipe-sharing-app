@@ -1,12 +1,18 @@
 {% extends 'common/base.html' %}
+{% load static %}
 
 {% block content %}
     
-    <form method="post" enctype="multipart/form-data">
+    <form id="recipe-form" method="post" enctype="multipart/form-data">
+    
         {% csrf_token %}
         {{ form.as_p }}
+        {% include 'recipes/ingredients.html' with edit_page=True %}
         <button type="reset" onclick="history.back()">Cancel</button>
         <button type="submit">Submit</button>
+    
     </form>
-
+    
+    <script src="{% static 'js/recipes/ingredients.js' %}"></script>
+    
 {% endblock %}

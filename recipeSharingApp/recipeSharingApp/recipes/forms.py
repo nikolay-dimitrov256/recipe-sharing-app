@@ -42,14 +42,14 @@ class RecipeBaseForm(forms.ModelForm):
 
                 recipe_picture.save()
 
-            input_tags_names = [name.strip() for name in tags.split('#')]
+            input_tags_names = [name.strip().lower() for name in tags.split('#')]
             existing_tags = Tag.objects.filter(name__in=input_tags_names)
             tags_to_create = list(set(input_tags_names) - set(existing_tags.values_list('name', flat=True)))
 
             tags_to_create = [
-                    Tag(name=tag.strip())
+                    Tag(name=tag)
                     for tag in tags_to_create
-                    if 0 < len(tag.strip()) <= Tag.TAG_MAX_LENGTH
+                    if 0 < len(tag) <= Tag.TAG_MAX_LENGTH
                 ]
 
             created_tags = Tag.objects.bulk_create(tags_to_create)

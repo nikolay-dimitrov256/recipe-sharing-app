@@ -4,19 +4,19 @@
 {% block content %}
     <article class="recipe" id="{{ recipe.pk }}">
     
-        {% if object.gallery.pictures.get_main %}
-        <div>
-            {% load cloudinary %}
-            {% cloudinary object.gallery.pictures.get_main.image quality='auto' width=200 height=200 crop='pad' background='gen_fill:ignore-foreground_true' %}
-            <a href="{% url 'delete-picture' object.gallery.pictures.get_main.pk %}">Delete</a>
-        </div>
-        {% endif %}
+{#        {% if object.gallery.pictures.get_main %}#}
+{#        <div>#}
+{#            {% load cloudinary %}#}
+{#            {% cloudinary object.gallery.pictures.get_main.image quality='auto' width=200 height=200 crop='pad' background='gen_fill:ignore-foreground_true' %}#}
+{#            <a href="{% url 'delete-picture' object.gallery.pictures.get_main.pk %}">Delete</a>#}
+{#        </div>#}
+{#        {% endif %}#}
         
         <h1>{{ object.title }}</h1>
         <p>{{ object.description }}</p>
         <p>{{ object.instructions }}</p>
         <div>
-        {% for ingredient, quantity in object.ingredients.items %}
+        {% for ingredient, quantity in ingredients.items %}
             <p>{{ ingredient }}: {{ quantity }}</p>
         {% endfor %}
         </div>
