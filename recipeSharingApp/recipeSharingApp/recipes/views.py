@@ -13,7 +13,7 @@ from django.views.generic import CreateView, DetailView, UpdateView, DeleteView,
 
 from recipeSharingApp.common.forms import CommentCreateForm
 from recipeSharingApp.recipes.forms import RecipeCreateForm, RecipeEditForm
-from recipeSharingApp.recipes.mixins import SetIsLikedInContextMixin
+from recipeSharingApp.recipes.mixins import SetRecipeDataInContextMixin
 from recipeSharingApp.recipes.models import Recipe
 
 
@@ -108,7 +108,7 @@ class DeleteRecipeView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return recipe.author == self.request.user
 
 
-class TrendingRecipesView(SetIsLikedInContextMixin, ListView):
+class TrendingRecipesView(SetRecipeDataInContextMixin, ListView):
     model = Recipe
     template_name = 'recipes/trending-recipes.html'
 
@@ -121,7 +121,7 @@ class TrendingRecipesView(SetIsLikedInContextMixin, ListView):
         )
 
 
-class MyRecipesView(LoginRequiredMixin, SetIsLikedInContextMixin, ListView):
+class MyRecipesView(LoginRequiredMixin, SetRecipeDataInContextMixin, ListView):
     model = Recipe
     template_name = 'recipes/my-recipes.html'
 

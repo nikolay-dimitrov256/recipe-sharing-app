@@ -148,6 +148,8 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
 
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
@@ -174,4 +176,4 @@ REST_FRAMEWORK = {
 #     'API_KEY': config('CLOUDINARY_API_KEY'),
 #     'API_SECRET': config('CLOUDINARY_API_SECRET'),
 # }
-# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+

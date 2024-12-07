@@ -1,11 +1,11 @@
 from django.db.models import Exists, OuterRef
 from django.views.generic import ListView
 
-from recipeSharingApp.recipes.mixins import SetIsLikedInContextMixin
+from recipeSharingApp.recipes.mixins import SetRecipeDataInContextMixin
 from recipeSharingApp.recipes.models import Recipe
 
 
-class HomeView(SetIsLikedInContextMixin, ListView):
+class HomeView(SetRecipeDataInContextMixin, ListView):
     model = Recipe
     template_name = 'common/home.html'
 

@@ -1,6 +1,11 @@
 <article class="recipe recipe-card" id="{{ recipe.pk }}">
 
     <h2>{{ recipe.title }}</h2>
+
+    {% if recipe.main_picture %}
+        <img src="{{ recipe.main_picture.image.url }}" alt="recipe-picture">
+    {% endif %}
+
     <p>{{ recipe.description }}</p>
     <p>{{ recipe.instructions }}</p>
     
