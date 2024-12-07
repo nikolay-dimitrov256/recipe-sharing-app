@@ -1,13 +1,9 @@
-{% extends 'common/base.html' %}
 {% load static %}
 
-{% block content %}
-    <div>
+<div>
     {% for recipe in object_list %}
         {% include 'recipes/recipe-card.html' %}
     {% endfor %}
-    </div>
-    
-    <script src="{% static 'js/common/like-unlike.js' %}"></script>
-    
-{% endblock %}
+</div>
+
+<script src="{% static 'js/common/like-unlike.js' %}"></script>
