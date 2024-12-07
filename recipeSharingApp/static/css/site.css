@@ -1,8 +1,17 @@
 body {
-    border: 1px solid blue;
+    /*border: 1px solid blue;*/
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background-color: blue;
+    & {
+        @media (min-width: 600px) {
+            background-color: yellow;
+        }
+        @media (min-width: 1000px) {
+            background-color: green;
+        }
+    }
 }
 
 body * {
