@@ -29,14 +29,7 @@ def send_recipe_ingredients_to_shopping_list(request, pk, recipe_id):
 
     recipe = Recipe.objects.get(pk=recipe_id)
 
-    try:
-        ingredients = json.loads(recipe.ingredients)
-        # products = json.loads(shopping_list.products)
-    except TypeError:
-        ingredients = {}
-        # products = {}
-
-    for product, quantity in ingredients.items():
+    for product, quantity in recipe.ingredients.items():
         shopping_list.products[product] = quantity
 
     shopping_list.save()

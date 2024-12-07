@@ -16,7 +16,7 @@
         <p>{{ object.description }}</p>
         <p>{{ object.instructions }}</p>
         <div>
-        {% for ingredient, quantity in ingredients.items %}
+        {% for ingredient, quantity in object.ingredients.items %}
             <p>{{ ingredient }}: {{ quantity }}</p>
         {% endfor %}
         </div>

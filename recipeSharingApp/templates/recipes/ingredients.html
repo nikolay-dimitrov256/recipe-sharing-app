@@ -2,7 +2,7 @@
 
 <div id="ingredients-container">
     {% if edit_page %}
-        {% for ingredient, quantity in ingredients.items %}
+        {% for ingredient, quantity in object.ingredients.items %}
             <div class="ingredient-row">
                 <input type="text" name="ingredient_name" placeholder="Ingredient name" value="{{ ingredient }}">
                 <input type="text" name="ingredient_quantity" placeholder="Quantity" value="{{ quantity }}">

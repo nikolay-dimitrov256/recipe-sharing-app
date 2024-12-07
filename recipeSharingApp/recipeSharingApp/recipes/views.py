@@ -30,13 +30,11 @@ class CreateRecipeView(CreateView):
         ingredients_json = self.request.POST.get('ingredients_json')
 
         try:
-            json.loads(ingredients_json)
+            ingredients = json.loads(ingredients_json)
         except JSONDecodeError:
             return self.form_invalid(form)
 
-        if ingredients_json:
-            self.object.ingredients = ingredients_json
-
+        self.object.ingredients = ingredients
         self.object.save()
 
         return HttpResponseRedirect(self.get_success_url())
@@ -49,13 +47,6 @@ class DetailsRecipeView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['comment_form'] = CommentCreateForm()
-
-        try:
-            context['ingredients'] = json.loads(self.object.ingredients)
-        except TypeError:
-            context['ingredients'] = self.object.ingredients
-        except JSONDecodeError:
-            context['ingredients'] = {}
 
         user = self.request.user
         recipe = context['object']
@@ -88,29 +79,15 @@ class EditRecipeView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
         return recipe.author == self.request.user
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-
-        try:
-            context['ingredients'] = json.loads(self.object.ingredients)
-        except TypeError:
-            context['ingredients'] = self.object.ingredients
-        except JSONDecodeError:
-            context['ingredients'] = {}
-
-        return context
-
     def form_valid(self, form):
         ingredients_json = self.request.POST.get('ingredients_json')
 
         try:
-            json.loads(ingredients_json)
+            ingredients = json.loads(ingredients_json)
         except JSONDecodeError:
             return self.form_invalid(form)
 
-        if ingredients_json:
-            self.object.ingredients = ingredients_json
-
+        self.object.ingredients = ingredients
         self.object.save()
 
         return HttpResponseRedirect(self.get_success_url())
