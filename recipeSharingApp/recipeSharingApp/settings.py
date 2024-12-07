@@ -43,6 +43,7 @@ PROJECT_APPS = [
     'recipeSharingApp.common',
     'recipeSharingApp.recipes',
     'recipeSharingApp.pictures',
+    'recipeSharingApp.shopping_list',
 ]
 
 INSTALLED_APPS = [

@@ -90,7 +90,7 @@ class EditRecipeView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        
+
         try:
             context['ingredients'] = json.loads(self.object.ingredients)
         except TypeError:

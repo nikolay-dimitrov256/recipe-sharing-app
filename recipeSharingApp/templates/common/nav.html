@@ -20,7 +20,7 @@
                 <a href="#">My Recipes</a>
             </li>
             <li>
-                <a href="#">Meal Plan</a>
+                <a href="{% url 'shopping-list-details' request.user.shoppinglist.pk %}">Shopping List</a>
             </li>
             <li class="nav-align-right">
                 <a href="{% url 'profile-details' request.user.pk %}">Profile</a>

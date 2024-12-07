@@ -43,6 +43,13 @@
             </a>
             <span class="likes-count">{{ recipe.likes.count }} likes</span>
         </div>
+        
+        {% if request.user.is_authenticated %}
+            <form id="send-ingredients-form" method="post" action="{% url 'ingredients-to-shopping-list' request.user.shoppinglist.pk recipe.pk %}">
+                {% csrf_token %}
+                <a href="#" onclick="document.getElementById('send-ingredients-form').submit()">Ingredients to Shopping List</a>
+            </form>
+        {% endif %}
     
     </article>
     

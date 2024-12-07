@@ -4,6 +4,7 @@ from django.dispatch import receiver
 
 from recipeSharingApp.accounts.models import Profile
 from recipeSharingApp.pictures.models import Gallery
+from recipeSharingApp.shopping_list.models import ShoppingList
 
 UserModel = get_user_model()
 
@@ -18,3 +19,9 @@ def create_profile(sender, instance: UserModel, created: bool, **kwargs):
 def create_gallery(sender, instance: Profile, created: bool, **kwargs):
     if created and not hasattr(instance, 'gallery'):
         Gallery.objects.create(profile=instance)
+
+
+@receiver(post_save, sender=UserModel)
+def create_shopping_list(sender, instance: UserModel, created: bool, **kwargs):
+    if created:
+        ShoppingList.objects.create(user=instance)

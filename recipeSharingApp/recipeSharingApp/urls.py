@@ -23,4 +23,5 @@ urlpatterns = [
     path('accounts/', include('recipeSharingApp.accounts.urls')),
     path('recipes/', include('recipeSharingApp.recipes.urls')),
     path('pictures/', include('recipeSharingApp.pictures.urls')),
+    path('shopping-list/', include('recipeSharingApp.shopping_list.urls')),
 ]
