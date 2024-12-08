@@ -4,10 +4,10 @@
         <div class="ingredient-row">
             <input type="text" name="ingredient_name" placeholder="Product name" value="{{ product }}">
             <input type="text" name="ingredient_quantity" placeholder="Quantity" value="{{ quantity }}">
-            <button type="button" class="remove-ingredient">Remove</button>
+            <button type="button" class="remove-ingredient reject">Remove</button>
         </div>
     {% endfor %}
 
 </div>
-<button type="button" id="add-ingredient">Add Product</button>
+<button class="take-action" type="button" id="add-ingredient">Add Product</button>
 <input type="hidden" name="ingredients_json" id="ingredients-json">

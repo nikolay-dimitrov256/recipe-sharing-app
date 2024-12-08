@@ -6,16 +6,16 @@
             <div class="ingredient-row">
                 <input type="text" name="ingredient_name" placeholder="Ingredient name" value="{{ ingredient }}">
                 <input type="text" name="ingredient_quantity" placeholder="Quantity" value="{{ quantity }}">
-                <button type="button" class="remove-ingredient">Remove</button>
+                <button type="button" class="remove-ingredient reject">Remove</button>
             </div>
         {% endfor %}
     {% endif %}
     <div class="ingredient-row">
         <input type="text" name="ingredient_name" placeholder="Ingredient name">
         <input type="text" name="ingredient_quantity" placeholder="Quantity">
-        <button type="button" class="remove-ingredient">Remove</button>
+        <button type="button" class="remove-ingredient reject">Remove</button>
     </div>
 
 </div>
-<button class="button" type="button" id="add-ingredient">Add Ingredient</button>
+<button class="button take-action" type="button" id="add-ingredient">Add Ingredient</button>
 <input type="hidden" name="ingredients_json" id="ingredients-json">

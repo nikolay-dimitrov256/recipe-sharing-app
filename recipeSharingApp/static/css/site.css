@@ -3,13 +3,13 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background-color: blue;
+
     & {
         @media (min-width: 600px) {
-            background-color: yellow;
+
         }
         @media (min-width: 1000px) {
-            background-color: green;
+
         }
     }
 }
@@ -106,40 +106,6 @@ h6 {
     transition: all 0.2s linear;
 }
 
-button,
-.button {
-    padding: 0.8em 1.2em;
-    border-radius: 0.5em;
-    background-color: #000;
-    color: #fff;
-    border: none;
-    &:hover {
-        cursor: pointer;
-        background-color: red;
-    }
-}
-
-.button.edit {
-    background-color: green;
-    &:hover {
-        background-color: blue;
-    }
-}
-
-.button.delete {
-    background-color: #000;
-    &:hover {
-        background-color: red;
-    }
-}
-
-.button.regular-btn {
-    background-color: blue;
-    &:hover {
-        background-color: yellow;
-        color: blue;
-    }
-}
 
 .tag {
     &:hover {
@@ -147,7 +113,3 @@ button,
     }
 }
 
-.buttons {
-    display: flex;
-    gap: 1em;
-}

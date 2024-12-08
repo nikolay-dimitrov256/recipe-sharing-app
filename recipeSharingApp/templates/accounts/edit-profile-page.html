@@ -36,8 +36,8 @@
         {% csrf_token %}
         {{ form.as_p }}
         <div class="buttons">
-            <a class="button" href="{% url 'profile-details' object.user.pk %}">Back</a>
-            <button type="submit">Submit</button>
+            <a class="button reject" href="{% url 'profile-details' object.user.pk %}">Back</a>
+            <button class="confirm" type="submit">Submit</button>
         </div>
 
     </form>

@@ -8,8 +8,8 @@
         {% include 'shopping_list/products.html' %}
 
         <div class="buttons">
-            <button type="submit">Save</button>
-            <a class="button" href="{% url 'shopping-list-details' shopping_list.pk %}">Cancel</a>
+            <button class="confirm" type="submit">Save</button>
+            <a class="button reject" href="{% url 'shopping-list-details' shopping_list.pk %}">Cancel</a>
         </div>
         
     </form>

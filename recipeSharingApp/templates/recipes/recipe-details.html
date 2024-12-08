@@ -54,8 +54,8 @@
         
         {% if object.author == request.user %}
         <div class="buttons">
-            <a class="button edit" href="{% url 'edit-recipe' object.pk %}">Edit</a>
-            <a class="button delete" href="{% url 'delete-recipe' object.pk %}">Delete</a>
+            <a class="button take-action" href="{% url 'edit-recipe' object.pk %}">Edit</a>
+            <a class="button take-action" href="{% url 'delete-recipe' object.pk %}">Delete</a>
         </div>
         {% endif %}
         
@@ -73,7 +73,7 @@
         {% if request.user.is_authenticated %}
             <form id="send-ingredients-form" method="post" action="{% url 'ingredients-to-shopping-list' request.user.shoppinglist.pk recipe.pk %}">
                 {% csrf_token %}
-                <a class="button regular-btn" href="#" onclick="document.getElementById('send-ingredients-form').submit()">Ingredients to Shopping List</a>
+                <a class="button take-action" href="#" onclick="document.getElementById('send-ingredients-form').submit()">Ingredients to Shopping List</a>
             </form>
         {% endif %}
     
@@ -93,7 +93,7 @@
             
             {% csrf_token %}
             {{ comment_form.as_p }}
-            <button class="button regular-btn" type="submit">Post Comment</button>
+            <button class="button take-action" type="submit">Post Comment</button>
             
         </form>
     

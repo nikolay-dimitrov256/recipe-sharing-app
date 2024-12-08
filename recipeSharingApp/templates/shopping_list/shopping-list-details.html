@@ -9,8 +9,8 @@
         {% endfor %}
         
         <div class="buttons">
-            <a class="button" href="{% url 'edit-shopping-list' object.pk %}">Edit</a>
-            <a class="button" href="{% url 'clear-shopping-list' object.pk %}">Clear</a>
+            <a class="button take-action" href="{% url 'edit-shopping-list' object.pk %}">Edit</a>
+            <a class="button take-action" href="{% url 'clear-shopping-list' object.pk %}">Clear</a>
         </div>
     </div>
 {% endblock %}

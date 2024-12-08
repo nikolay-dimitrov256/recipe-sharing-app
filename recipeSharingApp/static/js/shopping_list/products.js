@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const removeButton = document.createElement('button');
         removeButton.type = 'button';
         removeButton.classList.add('remove-ingredient');
+        removeButton.classList.add('reject');
         removeButton.textContent = 'Remove';
 
         // Append elements to the row

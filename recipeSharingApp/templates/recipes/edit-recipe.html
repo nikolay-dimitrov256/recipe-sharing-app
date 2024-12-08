@@ -40,8 +40,8 @@
             {{ form.as_p }}
             {% include 'recipes/ingredients.html' with edit_page=True %}
             <div class="buttons">
-                <a class="button regular-btn" href="{% url 'recipe-details' object.pk %}">Back</a>
-                <button class="button regular-btn" type="submit">Submit</button>
+                <a class="button reject" href="{% url 'recipe-details' object.pk %}">Back</a>
+                <button class="button confirm" type="submit">Submit</button>
             </div>
         </form>
     </div>

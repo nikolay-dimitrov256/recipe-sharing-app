@@ -7,8 +7,8 @@
     <form class="styled-form" method="post">
         {% csrf_token %}
         <div class="buttons">
-            <button type="submit">YES, CLEAR!!!</button>
-            <a class="button" href="{% url 'shopping-list-details' shopping_list.pk %}">No, go back!</a>
+            <button class="confirm" type="submit">YES, CLEAR!!!</button>
+            <a class="button reject" href="{% url 'shopping-list-details' shopping_list.pk %}">No, go back!</a>
         </div>
     </form>
 
