@@ -1,0 +1,9 @@
+.edit-recipe {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.edit-recipe h4 {
+    margin: 1em 0;
+}

@@ -63,6 +63,15 @@ h6 {
     font-size: 1.6rem;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0 auto;
+}
+
 .img-frame {
     width: 200px;
     height: 200px;
@@ -96,11 +105,15 @@ h6 {
     transition: all 0.2s linear;
 }
 
+button,
 .button {
     padding: 0.8em 1.2em;
     border-radius: 0.5em;
     color: #fff;
     border: none;
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 .button.edit {
@@ -129,4 +142,9 @@ h6 {
     &:hover {
         text-decoration: underline;
     }
+}
+
+.buttons {
+    display: flex;
+    gap: 1em;
 }

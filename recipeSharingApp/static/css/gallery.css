@@ -37,28 +37,41 @@
 
 }
 
-.gallery .focus-picture,
-.gallery .thumbnail {
-    position: relative;
-    z-index: 1;
-    & .icons {
-        position: absolute;
-        z-index: 2;
-        bottom: 0.5rem;
-        right: 0.5rem;
-        display: flex;
-        gap: 0.5rem;
-    }
+.edit-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2em;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2em;
 }
 
-.gallery .focus-picture .icons a {
+.edit-gallery .edit-picture-frame {
+    width: 20em;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+}
+
+.edit-gallery .picture-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    border: 2px solid #000;
+    padding: 0.5em;
+}
+
+.edit-gallery .icons {
+    display: flex;
+    gap: 1em;
+}
+
+.edit-gallery .icons a {
     display: block;
     width: 2rem;
     height: auto;
-}
-
-.gallery .thumbnails .icons a {
-    display: block;
-    width: 1rem;
-    height: auto;
+    &:hover svg {
+        fill: red;
+    }
 }

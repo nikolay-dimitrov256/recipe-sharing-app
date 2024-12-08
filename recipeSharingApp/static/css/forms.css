@@ -1,0 +1,20 @@
+.styled-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    & p {
+        display: flex;
+        flex-direction: column;
+    }
+
+}
+
+.styled-form .buttons {
+    margin-top: 1.5em;
+}
+
+.ingredient-row {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}

@@ -5,10 +5,8 @@
     gap: 1em;
 }
 
-.buttons {
+.recipe-page .buttons {
     align-self: flex-end;
-    display: flex;
-    gap: 1em;
 }
 
 .recipe-page .likes {
