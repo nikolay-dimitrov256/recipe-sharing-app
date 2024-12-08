@@ -1,0 +1,63 @@
+.gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+    align-items: center;
+}
+
+.gallery .focus-picture {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    & {
+        @media (min-width: 1000px) {
+            width: 35rem;
+        }
+    }
+}
+
+.gallery .thumbnails {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+
+.gallery .thumbnail {
+    width: 10rem;
+    height: 7rem;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    & :hover {
+        cursor: pointer;
+    }
+
+}
+
+.gallery .focus-picture,
+.gallery .thumbnail {
+    position: relative;
+    z-index: 1;
+    & .icons {
+        position: absolute;
+        z-index: 2;
+        bottom: 0.5rem;
+        right: 0.5rem;
+        display: flex;
+        gap: 0.5rem;
+    }
+}
+
+.gallery .focus-picture .icons a {
+    display: block;
+    width: 2rem;
+    height: auto;
+}
+
+.gallery .thumbnails .icons a {
+    display: block;
+    width: 1rem;
+    height: auto;
+}

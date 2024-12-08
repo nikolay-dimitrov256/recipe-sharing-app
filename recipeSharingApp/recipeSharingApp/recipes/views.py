@@ -55,6 +55,7 @@ class DetailsRecipeView(DetailView):
         user = self.request.user
         recipe = context['object']
         recipe.is_liked = recipe.likes.filter(author=user).exists() if self.request.user.is_authenticated else False
+        recipe.main_picture = recipe.gallery.pictures.filter(is_main=True).first()
 
         return context
 
@@ -84,6 +85,8 @@ class EditRecipeView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return recipe.author == self.request.user
 
     def form_valid(self, form):
+        self.object = form.save()
+
         ingredients_json = self.request.POST.get('ingredients_json')
 
         try:
