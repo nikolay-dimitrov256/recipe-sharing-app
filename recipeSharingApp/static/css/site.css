@@ -110,10 +110,12 @@ button,
 .button {
     padding: 0.8em 1.2em;
     border-radius: 0.5em;
+    background-color: #000;
     color: #fff;
     border: none;
     &:hover {
         cursor: pointer;
+        background-color: red;
     }
 }
 

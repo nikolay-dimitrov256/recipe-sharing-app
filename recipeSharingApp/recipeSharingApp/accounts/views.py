@@ -37,6 +37,13 @@ class ProfileDetailView(DetailView):
     model = UserModel
     template_name = 'accounts/profile-details-page.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = context['object']
+        user.main_picture = user.profile.gallery.pictures.filter(is_main=True).first()
+
+        return context
+
 
 class ProfileEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Profile

@@ -1,18 +1,41 @@
 {% extends 'common/base.html' %}
 
 {% block content %}
-<div>
-    {% if object.profile.gallery.pictures.get_main %}
-        <div>
-            <div class="img-frame">
-            {% load cloudinary %}
-            {% cloudinary object.profile.gallery.pictures.get_main.image quality='auto' width=200 height=200 crop='pad' background='gen_fill:ignore-foreground_true' %}
+<div class="profile-page">
+    <h1>{{ object.full_name }}</h1>
+    {% if object.profile.gallery.pictures.exists %}
+        <section class="gallery">
+        
+            <div class="focus-picture">
+                {% if object.main_picture %}
+                    <img src="{{ object.main_picture.image.url }}" alt="{{ object.full_name }}">
+                {% else %}
+                    <img src="{{ object.profile.gallery.pictures.first.image.url }}" alt="{{ object.full_name }}">
+                {% endif %}
             </div>
-            {% if request.user == object %}
-                <a href="{% url 'delete-picture' object.profile.gallery.pictures.get_main.pk %}">Delete Picture</a>
-            {% endif %}
-        </div>
+        
+            <div class="thumbnails">
+                {% for picture in object.profile.gallery.pictures.all %}
+                    <div class="thumbnail">
+                        <img src="{{ picture.image.url }}" alt="{{ object.full_name }}">
+                    </div>
+                    
+                {% endfor %}
+            </div>
+        
+        </section>
     {% endif %}
+{#    {% if object.profile.gallery.pictures.get_main %}#}
+{#        <div>#}
+{#            <div class="img-frame">#}
+{#            {% load cloudinary %}#}
+{#            {% cloudinary object.profile.gallery.pictures.get_main.image quality='auto' width=200 height=200 crop='pad' background='gen_fill:ignore-foreground_true' %}#}
+{#            </div>#}
+{#            {% if request.user == object %}#}
+{#                <a href="{% url 'delete-picture' object.profile.gallery.pictures.get_main.pk %}">Delete Picture</a>#}
+{#            {% endif %}#}
+{#        </div>#}
+{#    {% endif %}#}
 
     <p>Email: {{ object.email }}</p>
     <p>First Name: {{ object.first_name }}</p>
@@ -23,25 +46,40 @@
         <p>About me:</p>
         <p>{{ object.profile.about_me }}</p>
     {% endif %}
-</div>
-    
+
 {% if object == request.user %}
-    <div>
-        <a href="{% url 'edit-profile' object.pk %}">Edit Profile</a>
-        <a href="{% url 'delete-account' object.pk %}">Delete Profile</a>
+    <div class="buttons">
+        <a class="button" href="{% url 'edit-profile' object.pk %}">Edit Profile</a>
+        <a class="button" href="{% url 'delete-account' object.pk %}">Delete Profile</a>
     </div>
 {% else %}
     {% if request.user.is_authenticated and object in request.user.following.all %}
         <form id="unfollow-form" method="post" action="{% url 'unfollow-user' object.pk %}">
             {% csrf_token %}
-            <a href="#" onclick="document.getElementById('unfollow-form').submit()">Unfollow</a>
+            <a class="button" href="#" onclick="document.getElementById('unfollow-form').submit()">Unfollow</a>
         </form>
     {% elif object not in request.user.following.all %}
         <form id="follow-form" method="post" action="{% url 'follow-user' object.pk %}">
             {% csrf_token %}
-            <a href="#" onclick="document.getElementById('follow-form').submit()">Follow</a>
+            <a class="button" href="#" onclick="document.getElementById('follow-form').submit()">Follow</a>
         </form>
     {% endif %}
 {% endif %}
+
+</div>
+    
+<script>
+    const focusDivElement = document.querySelector('.focus-picture');
+    const thumbnailElements = document.querySelectorAll('.thumbnail');
+    
+    thumbnailElements.forEach(element => element.addEventListener('click', (e) => movePicture(e, element, focusDivElement)));
+    
+    function movePicture(event, thumbnailElement, focusDivElement) {
+        const thumbnailImgElement = thumbnailElement.querySelector('img');
+        const focusImgElement = focusDivElement.querySelector('img');
+        
+        focusImgElement.src = thumbnailImgElement.src;
+    }
+</script>
     
 {% endblock %}
