@@ -3,10 +3,12 @@
 {% block content %}
     
     <h2>Delete Picture?</h2>
-    <form method="post">
+    <form class="styled-form" method="post">
         {% csrf_token %}
-        <button type="submit">YES!!!</button>
-        <button type="reset" onclick="history.back()">No!</button>
+        <div class="buttons">
+            <button class="button" type="submit">YES!!!</button>
+            <button class="button" type="reset" onclick="history.back()">No!</button>
+        </div>
     </form>
 
 {% endblock %}

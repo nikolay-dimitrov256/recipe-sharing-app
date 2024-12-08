@@ -2,6 +2,7 @@ from cloudinary import uploader
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import HttpResponseForbidden
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
@@ -36,7 +37,7 @@ def delete_profile_picture(request, pk):
     return redirect('profile-details', user.pk)
 
 
-class DeletePictureView(DeleteView):
+class DeletePictureView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Picture
     template_name = 'pictures/delete-picture.html'
 
@@ -46,3 +47,11 @@ class DeletePictureView(DeleteView):
         elif self.object.gallery.profile:
             return reverse_lazy('profile-details', kwargs={'pk': self.request.user.pk})
         return reverse_lazy('home')
+
+    def test_func(self):
+        picture = get_object_or_404(Picture, pk=self.kwargs['pk'])
+        if picture.gallery.recipe:
+            return picture.gallery.recipe.author == self.request.user
+        elif picture.gallery.profile:
+            return picture.gallery.profile.user == self.request.user
+        return False

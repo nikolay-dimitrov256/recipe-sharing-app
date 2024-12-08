@@ -28,6 +28,7 @@ body > main {
     width: 298px;
     display: flex;
     flex-direction: column;
+    align-items: center;
     margin: 2em 0;
     & {
         @media (min-width: 600px) {
