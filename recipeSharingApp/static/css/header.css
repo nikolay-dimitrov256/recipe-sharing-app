@@ -2,6 +2,12 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    & {
+        @media (min-width: 1000px) {
+            flex-direction: column;
+            align-items: stretch;
+        }
+    }
 }
 
 header .logo {
@@ -16,7 +22,45 @@ header nav {
     display: none;
     & {
         @media (min-width: 1000px) {
-            display: block;
+            display: flex;
+            height: auto;
+            justify-content: center;
+        }
+    }
+}
+
+header nav ul {
+    & {
+        @media (min-width: 1000px) {
+            display: flex;
+            justify-content: center;
+            height: 100%;
+        }
+    }
+
+}
+
+header nav ul li {
+    list-style: none outside;
+    & {
+        @media (min-width: 1000px) {
+            display: flex;
+        }
+    }
+
+}
+
+header nav ul a {
+    text-decoration: none;
+    color: #3a4472;
+    font-weight: bold;
+    &:hover {
+        color: #fff;
+        background-color: #b49c11;
+    }
+    & {
+        @media (min-width: 1000px) {
+            padding: 0.5em 0.8em;
         }
     }
 }
@@ -81,27 +125,3 @@ label[for="nav-toggle"] {
     }
 }
 
-header nav ul {
-    & {
-        @media (min-width: 1000px) {
-            display: flex;
-            justify-content: center;
-        }
-    }
-
-}
-
-header nav ul li {
-    list-style: none outside;
-}
-
-header nav ul a {
-    text-decoration: none;
-    color: #3a4472;
-    /*padding: 0.5em 0.8em;*/
-    font-weight: bold;
-    &:hover {
-        color: #fff;
-        background-color: #b49c11;
-    }
-}
