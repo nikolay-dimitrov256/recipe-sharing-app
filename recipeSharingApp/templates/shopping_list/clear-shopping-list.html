@@ -4,10 +4,12 @@
     
     <h2>Clear your shopping list?</h2>
     
-    <form method="post">
+    <form class="styled-form" method="post">
         {% csrf_token %}
-        <button type="submit">YES, CLEAR!!!</button>
-        <button type="reset" onclick="history.back()">No, go back!</button>
+        <div class="buttons">
+            <button type="submit">YES, CLEAR!!!</button>
+            <a class="button" href="{% url 'shopping-list-details' shopping_list.pk %}">No, go back!</a>
+        </div>
     </form>
 
 {% endblock %}

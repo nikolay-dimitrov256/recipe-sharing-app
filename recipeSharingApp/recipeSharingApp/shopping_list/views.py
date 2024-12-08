@@ -76,4 +76,8 @@ def clear_shopping_list_view(request, pk):
 
         return redirect('shopping-list-details', pk)
 
-    return render(request, 'shopping_list/clear-shopping-list.html')
+    context = {
+        'shopping_list': shopping_list,
+    }
+
+    return render(request, 'shopping_list/clear-shopping-list.html', context)

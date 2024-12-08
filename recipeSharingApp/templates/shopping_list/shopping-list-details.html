@@ -1,14 +1,16 @@
 {% extends 'common/base.html' %}
 
 {% block content %}
-    <h1>Shopping List</h1>
-    
-    {% for product, quantity in object.products.items %}
-        <p>{{ product }} - {{ quantity }}</p>
-    {% endfor %}
-    
-    <div>
-        <a href="{% url 'edit-shopping-list' object.pk %}">Edit</a>
-        <a href="{% url 'clear-shopping-list' object.pk %}">Clear</a>
+    <div class="shopping-list">
+        <h1>Shopping List</h1>
+        
+        {% for product, quantity in object.products.items %}
+            <p>{{ product }} - {{ quantity }}</p>
+        {% endfor %}
+        
+        <div class="buttons">
+            <a class="button" href="{% url 'edit-shopping-list' object.pk %}">Edit</a>
+            <a class="button" href="{% url 'clear-shopping-list' object.pk %}">Clear</a>
+        </div>
     </div>
 {% endblock %}
