@@ -3,10 +3,12 @@
 {% block content %}
     
     <h2>Are you sure you want to delete your account?</h2>
-    <form method="post">
+    <form class="styled-form" method="post">
         {% csrf_token %}
-        <button type="submit">YES, DELETE!!!</button>
-        <button type="reset" onclick="history.back()">No, go back!</button>
+        <div class="buttons">
+            <button type="submit">YES, DELETE!!!</button>
+            <button type="reset" onclick="history.back()">No, go back!</button>
+        </div>
     </form>
     
 {% endblock %}
