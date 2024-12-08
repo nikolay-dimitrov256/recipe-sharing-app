@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-    <article class="recipe-page" id="{{ recipe.pk }}">
+    <article class="recipe recipe-page" id="{{ recipe.pk }}">
     
         {% if object.gallery.pictures.exists %}
             <section class="gallery">
@@ -51,23 +51,35 @@
         {% endif %}
         
         <h1>{{ object.title }}</h1>
-        <p>{{ object.description }}</p>
-        <p>{{ object.instructions }}</p>
+    
         <div>
-        {% for ingredient, quantity in object.ingredients.items %}
-            <p>{{ ingredient }}: {{ quantity }}</p>
-        {% endfor %}
-        </div>
-        <div>
-        {% for tag in object.tags.all %}
-            <a href="#">#{{ tag }}</a>
-        {% endfor %}
+            {% for tag in object.tags.all %}
+                <a class="tag" href="#">#{{ tag }}</a>
+            {% endfor %}
         </div>
         
+        {% if object.description %}
+            <h4>Description</h4>
+            <p>{{ object.description }}</p>
+        {% endif %}
+        
+        <h4>Instructions</h4>
+        <p>{{ object.instructions }}</p>
+        
+        {% if object.ingredients %}
+            <h4>Ingredients:</h4>
+            <div>
+            {% for ingredient, quantity in object.ingredients.items %}
+                <p>{{ ingredient }}: {{ quantity }}</p>
+            {% endfor %}
+            </div>
+        {% endif %}
+
+        
         {% if object.author == request.user %}
-        <div>
-            <a href="{% url 'edit-recipe' object.pk %}">Edit</a>
-            <a href="{% url 'delete-recipe' object.pk %}">Delete</a>
+        <div class="buttons">
+            <a class="button edit" href="{% url 'edit-recipe' object.pk %}">Edit</a>
+            <a class="button delete" href="{% url 'delete-recipe' object.pk %}">Delete</a>
         </div>
         {% endif %}
         
@@ -85,7 +97,7 @@
         {% if request.user.is_authenticated %}
             <form id="send-ingredients-form" method="post" action="{% url 'ingredients-to-shopping-list' request.user.shoppinglist.pk recipe.pk %}">
                 {% csrf_token %}
-                <a href="#" onclick="document.getElementById('send-ingredients-form').submit()">Ingredients to Shopping List</a>
+                <a class="button regular-btn" href="#" onclick="document.getElementById('send-ingredients-form').submit()">Ingredients to Shopping List</a>
             </form>
         {% endif %}
     
@@ -101,11 +113,11 @@
             </div>
         {% endfor %}
     
-        <form method="post" action="{% url 'add-comment' object.pk %}">
+        <form class="comment-form" method="post" action="{% url 'add-comment' object.pk %}">
             
             {% csrf_token %}
-            {{ comment_form }}
-            <button type="submit">Post Comment</button>
+            {{ comment_form.as_p }}
+            <button class="button regular-btn" type="submit">Post Comment</button>
             
         </form>
     

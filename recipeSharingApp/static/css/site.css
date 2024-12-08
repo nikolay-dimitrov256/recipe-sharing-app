@@ -26,6 +26,9 @@ body > main {
     flex-grow: 1;
     align-self: center;
     width: 298px;
+    display: flex;
+    flex-direction: column;
+    margin: 2em 0;
     & {
         @media (min-width: 600px) {
             width: 600px;
@@ -65,8 +68,14 @@ h6 {
     height: 200px;
 }
 
+.likes {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-end;
+}
+
 .likes a {
-    text-decoration: none;
+    display: block;
 }
 
 .likes .liked:hover svg,
@@ -85,4 +94,39 @@ h6 {
     stroke: red;
     stroke-width: 20px;
     transition: all 0.2s linear;
+}
+
+.button {
+    padding: 0.8em 1.2em;
+    border-radius: 0.5em;
+    color: #fff;
+    border: none;
+}
+
+.button.edit {
+    background-color: green;
+    &:hover {
+        background-color: blue;
+    }
+}
+
+.button.delete {
+    background-color: #000;
+    &:hover {
+        background-color: red;
+    }
+}
+
+.button.regular-btn {
+    background-color: blue;
+    &:hover {
+        background-color: yellow;
+        color: blue;
+    }
+}
+
+.tag {
+    &:hover {
+        text-decoration: underline;
+    }
 }

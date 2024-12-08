@@ -39,7 +39,7 @@ function like(recipeCardElement, likeAElement, baseURL) {
     })
         .then(response => {
             if (response.ok) {
-                likeAElement.classList.add('liked')
+                likeAElement.classList.toggle('liked')
                 refreshLikes(likeAElement, recipeID, baseURL);
             }
         })
