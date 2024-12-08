@@ -50,8 +50,8 @@
 
 .edit-gallery .edit-picture-frame {
     width: 20em;
-    height: auto;
-    aspect-ratio: 1 / 1;
+    height: 20em;
+    overflow: hidden;
     display: flex;
     align-items: center;
 }

@@ -1,13 +1,43 @@
 {% extends 'common/base.html' %}
 
 {% block content %}
-    <form method="post" enctype="multipart/form-data">
+    {% if object.gallery.pictures.exists %}
+        <h4>Pictures</h4>
+        
+        <section class="edit-gallery">
+        
+            {% for picture in object.gallery.pictures.all %}
+                <div class="picture-wrapper">
+                    <div class="edit-picture-frame">
+                        <img src="{{ picture.image.url }}" alt="{{ object.user.full_name }}">
+                    </div>
+                    
+                    <div class="icons">
+                        {% if not picture.is_main %}
+                            <a class="make-main" href="#" onclick="document.getElementById('make-main{{ picture.pk }}').submit()">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M64 32C64 14.3 49.7 0 32 0S0 14.3 0 32L0 64 0 368 0 480c0 17.7 14.3 32 32 32s32-14.3 32-32l0-128 64.3-16.1c41.1-10.3 84.6-5.5 122.5 13.4c44.2 22.1 95.5 24.8 141.7 7.4l34.7-13c12.5-4.7 20.8-16.6 20.8-30l0-247.7c0-23-24.2-38-44.8-27.7l-9.6 4.8c-46.3 23.2-100.8 23.2-147.1 0c-35.1-17.6-75.4-22-113.5-12.5L64 48l0-16z"/></svg>
+                            </a>
+                        {% endif %}
+                        <a class="delete-picture" href="{% url 'delete-picture' picture.pk %}">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0-7.2-14.3C307.4 6.8 296.3 0 284.2 0L163.8 0c-12.1 0-23.2 6.8-28.6 17.7zM416 128L32 128 53.2 467c1.6 25.3 22.6 45 47.9 45l245.8 0c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>
+                        </a>
+                    </div>
+                    <form action="{% url 'make-main' picture.pk %}" method="post" id="make-main{{ picture.pk }}" style="display: none">
+                        {% csrf_token %}
+                    </form>
+                </div>
+            {% endfor %}
+        
+        </section>
+    {% endif %}
+    
+    <form class="styled-form" method="post" enctype="multipart/form-data">
     
         {% csrf_token %}
         {{ form.as_p }}
-        <div>
-            <button type="reset" onclick="history.back()">Cancel</button>
-            <button type="submit">Submit Changes</button>
+        <div class="buttons">
+            <a class="button" href="{% url 'profile-details' object.user.pk %}">Back</a>
+            <button type="submit">Submit</button>
         </div>
 
     </form>
