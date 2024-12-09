@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from django.core.validators import MinLengthValidator
 from django.db import models
 
 from recipeSharingApp.common.mixins import CreatedMixin, UpdatedMixin
@@ -21,7 +22,11 @@ class Recipe(CreatedMixin, UpdatedMixin):
         blank=True,
     )
 
-    instructions = models.TextField()
+    instructions = models.TextField(
+        validators=[
+            MinLengthValidator(10, message='You can come up with at least 10 characters. Come on, how to cook this?')
+        ],
+    )
 
     author = models.ForeignKey(
         to=UserModel,
