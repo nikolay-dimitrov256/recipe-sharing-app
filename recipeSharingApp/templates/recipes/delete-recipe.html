@@ -2,9 +2,11 @@
 
 {% block content %}
     <h2>Are you sure you want to delete this recipe?</h2>
-    <form method="post">
+    <form class="styled-form" method="post">
         {% csrf_token %}
-        <button class="confirm" type="submit">YES, DELETE!!!</button>
-        <button class="reject" type="reset" onclick="history.back()">No, go back!</button>
+        <div class="buttons">
+            <button class="confirm" type="submit">YES, DELETE!!!</button>
+            <button class="reject" type="reset" onclick="history.back()">No, go back!</button>
+        </div>
     </form>
 {% endblock %}

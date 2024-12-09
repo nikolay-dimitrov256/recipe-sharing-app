@@ -21,6 +21,8 @@
     <p>Created by: 
         {% if recipe.author %}
             <a href="{% url 'profile-details' recipe.author.pk %}">{{ recipe.author.full_name }}</a></p>
+        {% else %}
+            Deleted user
         {% endif %}
     <a href="{% url 'recipe-details' recipe.pk %}">See more</a>
     
