@@ -134,16 +134,20 @@ class MyRecipesView(LoginRequiredMixin, SetRecipeDataInContextMixin, ListView):
         return Recipe.objects.filter(author=self.request.user).order_by('-created_at', '-updated_at')
 
 
-def search_by_tag_view(request, tag_id):
-    tag = Tag.objects.get(pk=tag_id)
+class SearchByTagView(ListView):
+    model = Recipe
+    template_name = 'recipes/tagged_recipies.html'
+    paginate_by = 10
 
-    recipes = Recipe.objects.filter(tags__name__icontains=tag.name)
+    def get_queryset(self):
+        tag = Tag.objects.get(pk=self.kwargs['tag_id'])
 
-    for recipe in recipes:
-        recipe.main_picture = recipe.gallery.pictures.filter(is_main=True).first()
+        return Recipe.objects.filter(tags__name__icontains=tag.name)
 
-    context = {
-        'object_list': recipes
-    }
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(object_list=object_list, **kwargs)
 
-    return render(request, 'recipes/tagged_recipies.html', context)
+        for recipe in context['object_list']:
+            recipe.main_picture = recipe.gallery.pictures.filter(is_main=True).first()
+
+        return context
