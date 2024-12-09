@@ -15,7 +15,7 @@
     
     <div>
         {% for tag in recipe.tags.all %}
-            <a href="#">#{{ tag.name }}</a>
+            <a class="tag" href="{% url 'tag-search' tag.pk %}">#{{ tag.name }}</a>
         {% endfor %}
     </div>
     <p>Created by: 

@@ -30,7 +30,7 @@
     
         <div>
             {% for tag in object.tags.all %}
-                <a class="tag" href="#">#{{ tag }}</a>
+                <a class="tag" href="{% url 'tag-search' tag.pk %}">#{{ tag }}</a>
             {% endfor %}
         </div>
         

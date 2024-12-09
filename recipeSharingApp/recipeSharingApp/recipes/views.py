@@ -3,8 +3,7 @@ from datetime import datetime, timedelta
 from json import JSONDecodeError
 
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.core.exceptions import ValidationError
-from django.db.models import F, Count
+from django.db.models import Count
 from django.db.models.functions import Now
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
@@ -12,6 +11,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView, ListView
 
 from recipeSharingApp.common.forms import CommentCreateForm
+from recipeSharingApp.common.models import Tag
 from recipeSharingApp.recipes.forms import RecipeCreateForm, RecipeEditForm
 from recipeSharingApp.recipes.mixins import SetRecipeDataInContextMixin
 from recipeSharingApp.recipes.models import Recipe
@@ -132,3 +132,18 @@ class MyRecipesView(LoginRequiredMixin, SetRecipeDataInContextMixin, ListView):
 
     def get_queryset(self):
         return Recipe.objects.filter(author=self.request.user).order_by('-created_at', '-updated_at')
+
+
+def search_by_tag_view(request, tag_id):
+    tag = Tag.objects.get(pk=tag_id)
+
+    recipes = Recipe.objects.filter(tags__name__icontains=tag.name)
+
+    for recipe in recipes:
+        recipe.main_picture = recipe.gallery.pictures.filter(is_main=True).first()
+
+    context = {
+        'object_list': recipes
+    }
+
+    return render(request, 'recipes/tagged_recipies.html', context)
