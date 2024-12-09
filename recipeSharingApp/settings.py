@@ -59,7 +59,7 @@ INSTALLED_APPS = [
         'cloudinary',
         'cloudinary_storage',
         'rest_framework',
-        'corsheaders',
+        #'corsheaders',
 ] + PROJECT_APPS
 
 MIDDLEWARE = [
@@ -72,10 +72,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    'corsheaders.middleware.CorsMiddleware',
+    # 'corsheaders.middleware.CorsMiddleware',
 ]
 
-CORS_ORIGIN_ALLOW_ALL = False
+# CORS_ORIGIN_ALLOW_ALL = False
 
 ROOT_URLCONF = 'recipeSharingApp.urls'
 
