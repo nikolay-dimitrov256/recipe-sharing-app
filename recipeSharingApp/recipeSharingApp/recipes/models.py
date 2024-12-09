@@ -13,6 +13,7 @@ class Recipe(CreatedMixin, UpdatedMixin):
 
     ingredients = models.JSONField(
         default=dict,
+        blank=True,
     )
 
     description = models.TextField(
