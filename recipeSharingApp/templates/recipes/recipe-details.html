@@ -88,14 +88,16 @@
                 <p>{{ comment.content }}</p>
             </div>
         {% endfor %}
-    
-        <form class="comment-form" method="post" action="{% url 'add-comment' object.pk %}">
-            
-            {% csrf_token %}
-            {{ comment_form.as_p }}
-            <button class="button take-action" type="submit">Post Comment</button>
-            
-        </form>
+        
+        {% if request.user.is_authenticated %}
+            <form class="comment-form" method="post" action="{% url 'add-comment' object.pk %}">
+                
+                {% csrf_token %}
+                {{ comment_form.as_p }}
+                <button class="button take-action" type="submit">Post Comment</button>
+                
+            </form>
+        {% endif %}
     
     </div>
     
