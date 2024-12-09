@@ -1,0 +1,117 @@
+body {
+    /*border: 1px solid blue;*/
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+    & {
+        @media (min-width: 600px) {
+
+        }
+        @media (min-width: 1000px) {
+
+        }
+    }
+}
+
+body * {
+    /* border: 1px solid green; */
+}
+
+body > footer {
+    background-color: #6374be;
+}
+
+body > main {
+    flex-grow: 1;
+    align-self: center;
+    width: 298px;
+    display: flex;
+    flex-direction: column;
+    margin: 2em 0;
+    & {
+        @media (min-width: 600px) {
+            width: 600px;
+        }
+        @media (min-width: 1000px) {
+            width: 1000px;
+        }
+    }
+}
+
+h1 {
+    font-size: 2.8rem;
+}
+
+h2 {
+    font-size: 2.4rem;
+}
+
+h3 {
+    font-size: 2.2rem;
+}
+
+h4 {
+    font-size: 2rem;
+}
+
+h5 {
+    font-size: 1.8rem;
+}
+
+h6 {
+    font-size: 1.6rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0 auto;
+}
+
+.img-frame {
+    width: 200px;
+    height: 200px;
+}
+
+.likes {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-end;
+}
+
+.likes a {
+    display: block;
+}
+
+.likes .liked:hover svg,
+.likes svg {
+    width: 2em;
+    height: auto;
+    fill: transparent;
+    stroke: #000;
+    stroke-width: 20px;
+    transition: all 0.2s linear;
+}
+
+.likes a:hover svg,
+.likes .liked svg {
+    fill: red;
+    stroke: red;
+    stroke-width: 20px;
+    transition: all 0.2s linear;
+}
+
+
+.tag {
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.errorlist li {
+    color: red;
+}

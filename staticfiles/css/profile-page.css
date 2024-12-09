@@ -1,0 +1,11 @@
+.profile-page {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    align-items: center;
+}
+
+#follow-form,
+#unfollow-form {
+    margin-top: 2em;
+}

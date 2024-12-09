@@ -1,0 +1,73 @@
+.buttons {
+    display: flex;
+    gap: 1em;
+}
+
+button,
+.button {
+    padding: 0.8em 1.2em;
+    border-radius: 0.5em;
+    /*background-color: #000;*/
+    /*color: #fff;*/
+    border: none;
+    &:hover {
+        cursor: pointer;
+        /*background-color: red;*/
+    }
+}
+
+/*.button.edit {*/
+/*    background-color: green;*/
+/*    &:hover {*/
+/*        background-color: blue;*/
+/*    }*/
+/*}*/
+
+/*.button.delete {*/
+/*    background-color: #000;*/
+/*    &:hover {*/
+/*        background-color: red;*/
+/*    }*/
+/*}*/
+
+/*.button.regular-btn {*/
+/*    background-color: blue;*/
+/*    &:hover {*/
+/*        background-color: yellow;*/
+/*        color: blue;*/
+/*    }*/
+/*}*/
+
+.confirm {
+    background-color: #000;
+    color: #fff;
+    &:hover {
+        background-color: red;
+    }
+}
+
+.reject {
+    background-color: red;
+    color: #fff;
+    &:hover {
+        background-color: #000;
+    }
+}
+
+.info {
+    background-color: green;
+    color: #fff;
+    &:hover {
+        background-color: yellow;
+        color: #000;
+    }
+}
+
+.take-action {
+    background-color: blue;
+    color: #fff;
+    &:hover {
+        background-color: yellow;
+        color: #000;
+    }
+}

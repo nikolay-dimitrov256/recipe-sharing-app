@@ -1,0 +1,79 @@
+.gallery {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+    align-items: center;
+}
+
+.gallery .focus-picture {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    & {
+        @media (min-width: 1000px) {
+            width: 35rem;
+        }
+    }
+}
+
+.gallery .thumbnails {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+}
+
+.gallery .thumbnail {
+    width: 10rem;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    border: 2px solid #000;
+    & :hover {
+        cursor: pointer;
+    }
+
+}
+
+.edit-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2em;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2em;
+}
+
+.edit-gallery .edit-picture-frame {
+    width: 20em;
+    height: 20em;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.edit-gallery .picture-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    border: 2px solid #000;
+    padding: 0.5em;
+}
+
+.edit-gallery .icons {
+    display: flex;
+    gap: 1em;
+}
+
+.edit-gallery .icons a {
+    display: block;
+    width: 2rem;
+    height: auto;
+    &:hover svg {
+        fill: red;
+    }
+}

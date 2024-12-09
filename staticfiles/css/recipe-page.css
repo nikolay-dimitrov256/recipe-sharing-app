@@ -1,0 +1,35 @@
+.recipe-page {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1em;
+}
+
+.recipe-page .buttons {
+    align-self: flex-end;
+}
+
+.recipe-page .likes {
+    margin-bottom: 2em;
+}
+
+.comments {
+    margin-top: 3em;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+
+.comment-form p {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.comment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    align-items: flex-start;
+}

@@ -1,0 +1,127 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    & {
+        @media (min-width: 1000px) {
+            flex-direction: column;
+            align-items: stretch;
+        }
+    }
+}
+
+header .logo {
+    display: block;
+    width: 5em;
+    height: auto;
+    margin-left: 1.5em;
+}
+
+header nav {
+    background-color: #dbc235;
+    display: none;
+    & {
+        @media (min-width: 1000px) {
+            display: flex;
+            height: auto;
+            justify-content: center;
+        }
+    }
+}
+
+header nav ul {
+    & {
+        @media (min-width: 1000px) {
+            display: flex;
+            justify-content: center;
+            height: 100%;
+        }
+    }
+
+}
+
+header nav ul li {
+    list-style: none outside;
+    & {
+        @media (min-width: 1000px) {
+            display: flex;
+        }
+    }
+
+}
+
+header nav ul a {
+    text-decoration: none;
+    color: #3a4472;
+    font-weight: bold;
+    &:hover {
+        color: #fff;
+        background-color: #b49c11;
+    }
+    & {
+        @media (min-width: 1000px) {
+            padding: 0.5em 0.8em;
+        }
+    }
+}
+
+label[for="nav-toggle"] {
+    margin-right: 1.5em;
+    & svg {
+        width: 2.5em;
+        height: auto;
+    }
+    & .show-nav {
+        display: inline;
+    }
+    & .hide-nav {
+        display: none;
+    }
+    & {
+        @media (min-width: 1000px) {
+            display: none;
+        }
+    }
+}
+
+#nav-toggle {
+    display: none;
+}
+
+#nav-toggle:checked + label {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 10;
+    & .show-nav {
+        display: none;
+    }
+    & .hide-nav {
+        display: inline;
+    }
+}
+
+#nav-toggle:checked ~ nav {
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    width: 100%;
+    z-index: 9;
+    position: absolute;
+    bottom: 0;
+
+    & ul {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: center;
+        gap: 1em;
+    }
+
+    & a {
+        font-size: 2em;
+        display: block;
+        text-align: center;
+    }
+}
+

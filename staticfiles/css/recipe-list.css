@@ -1,0 +1,21 @@
+.recipes {
+    display: flex;
+    flex-direction: column;
+}
+
+.pagination {
+    margin: 0 auto;
+    & .current {
+        font-weight: bold;
+    }
+}
+
+.pagination a {
+    padding: 0.5em 0.8em;
+    background-color: #3a4472;
+    color: #fff;
+    border: 1px solid #000;
+    &:hover {
+        background-color: orange;
+    }
+}
