@@ -8,6 +8,7 @@ from recipeSharingApp.recipes.models import Recipe
 class HomeView(SetRecipeDataInContextMixin, ListView):
     model = Recipe
     template_name = 'common/home.html'
+    paginate_by = 10
 
     def get_queryset(self):
         if self.request.user.is_authenticated:

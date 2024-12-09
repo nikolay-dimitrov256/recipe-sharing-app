@@ -114,6 +114,7 @@ class DeleteRecipeView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 class TrendingRecipesView(SetRecipeDataInContextMixin, ListView):
     model = Recipe
     template_name = 'recipes/trending-recipes.html'
+    paginate_by = 10
 
     def get_queryset(self):
         return (
@@ -127,6 +128,7 @@ class TrendingRecipesView(SetRecipeDataInContextMixin, ListView):
 class MyRecipesView(LoginRequiredMixin, SetRecipeDataInContextMixin, ListView):
     model = Recipe
     template_name = 'recipes/my-recipes.html'
+    paginate_by = 10
 
     def get_queryset(self):
         return Recipe.objects.filter(author=self.request.user).order_by('-created_at', '-updated_at')
