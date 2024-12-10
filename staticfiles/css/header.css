@@ -2,6 +2,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: #79afff;
     & {
         @media (min-width: 1000px) {
             flex-direction: column;
@@ -18,7 +19,7 @@ header .logo {
 }
 
 header nav {
-    background-color: #dbc235;
+    background-color: #ffd900;
     display: none;
     & {
         @media (min-width: 1000px) {
@@ -66,7 +67,7 @@ header nav ul a {
 }
 
 label[for="nav-toggle"] {
-    margin-right: 1.5em;
+    margin: 1.5em 2em 0 0;
     & svg {
         width: 2.5em;
         height: auto;

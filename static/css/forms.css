@@ -21,3 +21,9 @@
     gap: 0.5rem;
     margin-bottom: 0.5rem;
 }
+
+.styled-form input[type="password"],
+.styled-form input[type="text"],
+.styled-form input[type="email"] {
+    height: 2.5em;
+}

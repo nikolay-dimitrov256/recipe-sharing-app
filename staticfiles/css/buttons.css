@@ -7,50 +7,25 @@ button,
 .button {
     padding: 0.8em 1.2em;
     border-radius: 0.5em;
-    /*background-color: #000;*/
-    /*color: #fff;*/
     border: none;
     &:hover {
         cursor: pointer;
-        /*background-color: red;*/
     }
 }
 
-/*.button.edit {*/
-/*    background-color: green;*/
-/*    &:hover {*/
-/*        background-color: blue;*/
-/*    }*/
-/*}*/
-
-/*.button.delete {*/
-/*    background-color: #000;*/
-/*    &:hover {*/
-/*        background-color: red;*/
-/*    }*/
-/*}*/
-
-/*.button.regular-btn {*/
-/*    background-color: blue;*/
-/*    &:hover {*/
-/*        background-color: yellow;*/
-/*        color: blue;*/
-/*    }*/
-/*}*/
-
 .confirm {
-    background-color: #000;
+    background-color: #3da713;
     color: #fff;
     &:hover {
-        background-color: red;
+        background-color: #327c14;
     }
 }
 
 .reject {
-    background-color: red;
+    background-color: #db2323;
     color: #fff;
     &:hover {
-        background-color: #000;
+        background-color: #aa2020;
     }
 }
 
@@ -58,16 +33,15 @@ button,
     background-color: green;
     color: #fff;
     &:hover {
-        background-color: yellow;
-        color: #000;
+        background-color: yellowgreen;
     }
 }
 
 .take-action {
-    background-color: blue;
+    background-color: #2442c5;
     color: #fff;
     &:hover {
-        background-color: yellow;
-        color: #000;
+        background-color: #031e97;
+        color: #fff;
     }
 }
