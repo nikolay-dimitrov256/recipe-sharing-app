@@ -7,7 +7,6 @@ from recipeSharingApp.common.serializers import LikeSerializer
 
 
 class LikeCreateView(APIView):
-    # permission_classes = [IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
         serializer = LikeSerializer(data=request.data)
@@ -37,7 +36,6 @@ class LikeRetrieveDeleteView(APIView):
             return Response(status=HTTP_204_NO_CONTENT)
         except Like.DoesNotExist:
             return Response({'detail': 'Like not found.'}, status=HTTP_404_NOT_FOUND)
-
 
     def get(self, request, *args, **kwargs):
         recipe_id = self.kwargs.get('recipe_id')

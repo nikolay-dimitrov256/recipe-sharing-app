@@ -1,4 +1,3 @@
-from django.contrib import messages
 from django.contrib.auth import get_user_model, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -6,8 +5,6 @@ from django.contrib.auth.views import LoginView
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
-from django.http import HttpResponseForbidden
-from cloudinary import uploader
 
 from recipeSharingApp.accounts.forms import AppUserCreateForm, ProfileEditForm
 from recipeSharingApp.accounts.models import Profile

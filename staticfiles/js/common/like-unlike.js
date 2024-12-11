@@ -39,7 +39,7 @@ function like(recipeCardElement, likeAElement, baseURL) {
     })
         .then(response => {
             if (response.ok) {
-                likeAElement.classList.toggle('liked')
+                likeAElement.classList.add('liked')
                 refreshLikes(likeAElement, recipeID, baseURL);
             }
         })
@@ -60,7 +60,7 @@ function unlike(likeAElement, baseURL) {
     })
         .then(response => {
             if (response.ok) {
-                likeAElement.classList.toggle('liked');
+                likeAElement.classList.remove('liked');
                 refreshLikes(likeAElement, recipeID, baseURL);
             }
         })

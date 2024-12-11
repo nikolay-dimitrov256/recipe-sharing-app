@@ -1,5 +1,5 @@
 import json
-from datetime import datetime, timedelta
+from datetime import timedelta
 from json import JSONDecodeError
 
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -17,7 +17,7 @@ from recipeSharingApp.recipes.mixins import SetRecipeDataInContextMixin
 from recipeSharingApp.recipes.models import Recipe
 
 
-class CreateRecipeView(CreateView):
+class CreateRecipeView(LoginRequiredMixin, CreateView):
     model = Recipe
     form_class = RecipeCreateForm
     template_name = 'recipes/create-recipe.html'
@@ -134,7 +134,7 @@ class MyRecipesView(LoginRequiredMixin, SetRecipeDataInContextMixin, ListView):
         return Recipe.objects.filter(author=self.request.user).order_by('-created_at', '-updated_at')
 
 
-class SearchByTagView(ListView):
+class SearchByTagView(SetRecipeDataInContextMixin, ListView):
     model = Recipe
     template_name = 'recipes/tagged_recipies.html'
     paginate_by = 10
@@ -143,11 +143,3 @@ class SearchByTagView(ListView):
         tag = Tag.objects.get(pk=self.kwargs['tag_id'])
 
         return Recipe.objects.filter(tags__name__icontains=tag.name)
-
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(object_list=object_list, **kwargs)
-
-        for recipe in context['object_list']:
-            recipe.main_picture = recipe.gallery.pictures.filter(is_main=True).first()
-
-        return context

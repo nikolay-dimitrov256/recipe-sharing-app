@@ -1,6 +1,3 @@
-from recipeSharingApp.pictures.models import Gallery
-
-
 class SetRecipeDataInContextMixin:
 
     def get_context_data(self, object_list=None, **kwargs):

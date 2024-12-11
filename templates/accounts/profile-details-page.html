@@ -25,17 +25,6 @@
         
         </section>
     {% endif %}
-{#    {% if object.profile.gallery.pictures.get_main %}#}
-{#        <div>#}
-{#            <div class="img-frame">#}
-{#            {% load cloudinary %}#}
-{#            {% cloudinary object.profile.gallery.pictures.get_main.image quality='auto' width=200 height=200 crop='pad' background='gen_fill:ignore-foreground_true' %}#}
-{#            </div>#}
-{#            {% if request.user == object %}#}
-{#                <a href="{% url 'delete-picture' object.profile.gallery.pictures.get_main.pk %}">Delete Picture</a>#}
-{#            {% endif %}#}
-{#        </div>#}
-{#    {% endif %}#}
 
     <p>Email: {{ object.email }}</p>
     <p>First Name: {{ object.first_name }}</p>

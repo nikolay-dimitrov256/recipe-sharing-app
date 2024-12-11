@@ -7,7 +7,6 @@
     
         {% csrf_token %}
         {{ form.as_p }}
-{#        {{ form.errors }}#}
         {% include 'recipes/ingredients.html' %}
         <button class="confirm">Create Recipe</button>
     
