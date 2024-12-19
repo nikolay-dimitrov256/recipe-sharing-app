@@ -15,6 +15,12 @@ UserModel = get_user_model()
 class AppUserLoginView(LoginView):
     template_name = 'accounts/login-page.html'
 
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect('home')
+
+        return super().dispatch(request, *args, **kwargs)
+
 
 class AppUserRegisterView(CreateView):
     model = UserModel
@@ -28,6 +34,12 @@ class AppUserRegisterView(CreateView):
         login(self.request, self.object)
 
         return response
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect('home')
+
+        return super().dispatch(request, *args, **kwargs)
 
 
 class ProfileDetailView(DetailView):
