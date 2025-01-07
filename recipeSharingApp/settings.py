@@ -20,7 +20,8 @@ import cloudinary.api
 cloudinary.config(
     cloud_name=config('CLOUDINARY_CLOUD_NAME'),
     api_key=config('CLOUDINARY_API_KEY'),
-    api_secret=config('CLOUDINARY_API_SECRET')
+    api_secret=config('CLOUDINARY_API_SECRET'),
+    secure=True,  # Ensures image urls are https
 )
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
