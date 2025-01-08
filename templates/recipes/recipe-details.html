@@ -38,10 +38,7 @@
             <h4>Description</h4>
             <div>{{ object.description|linebreaks }}</div>
         {% endif %}
-        
-        <h4>Instructions</h4>
-        <div>{{ object.instructions|linebreaks }}</div>
-        
+    
         {% if object.ingredients %}
             <h4>Ingredients:</h4>
             <div>
@@ -50,7 +47,9 @@
             {% endfor %}
             </div>
         {% endif %}
-
+        
+        <h4>Instructions</h4>
+        <div>{{ object.instructions|linebreaks }}</div>
         
         {% if object.author == request.user %}
         <div class="buttons">
