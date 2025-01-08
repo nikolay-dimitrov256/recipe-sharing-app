@@ -36,11 +36,11 @@
         
         {% if object.description %}
             <h4>Description</h4>
-            <p>{{ object.description }}</p>
+            <div>{{ object.description|linebreaks }}</div>
         {% endif %}
         
         <h4>Instructions</h4>
-        <p>{{ object.instructions }}</p>
+        <div>{{ object.instructions|linebreaks }}</div>
         
         {% if object.ingredients %}
             <h4>Ingredients:</h4>
