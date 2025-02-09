@@ -174,5 +174,5 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer'
-    ]  # Disables the API GUI
+    ]  # removes the rest_framework visualisation tool
 }
